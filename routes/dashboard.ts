@@ -4,7 +4,7 @@ import { URLSearchParams } from 'url';
 import { render, error } from '../render_helpers';
 import config from '../config/config';
 import { Signatory } from '../models/signatory';
-import type { ResponseWithLayout, SignRequestBody } from '../definitions';
+import type { AuthRedirectRequestQs, ResponseWithLayout, SignRequestBody } from '../definitions';
 import crypto from 'crypto';
 import type { Debugger } from 'debug'
 const fetch = require('node-fetch');
@@ -52,9 +52,9 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
         res.redirect(`https://stackexchange.com/oauth?client_id=${config.getSiteSetting('clientId')}&scope=&state=${signatory.id}|${letter}&redirect_uri=${config.getSiteSetting('redirectUri')}`);
     });
 
-    router.get('/auth-redirect', async (req: express.Request, res: ResponseWithLayout) => {
-        const code = req.query['code'] as string;
-        const state = req.query['state'] as string;
+    router.get('/auth-redirect', async (req: express.Request<any, any, any, AuthRedirectRequestQs>, res: ResponseWithLayout) => {
+        const code = req.query['code'];
+        const state = req.query['state'];
         const signatoryId = state.split('|')[0];
         const letter = state.split('|')[1];
 
