@@ -7,6 +7,7 @@ import { Signatory } from '../models/signatory';
 import type { AuthRedirectRequestQs, ResponseWithLayout, SignRequestBody } from '../definitions';
 import crypto from 'crypto';
 import type { Debugger } from 'debug'
+import { getAuthRedirectURL } from '../helpers/auth';
 const fetch = require('node-fetch');
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -49,7 +50,7 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
             return;
         }
         const signatory: Signatory = await <Promise<Signatory>>Signatory.create({ display_name: displayName, letter });
-        res.redirect(`https://stackexchange.com/oauth?client_id=${config.getSiteSetting('clientId')}&scope=&state=${signatory.id}|${letter}&redirect_uri=${config.getSiteSetting('redirectUri')}`);
+        res.redirect(getAuthRedirectURL(config, signatory, letter));
     });
 
     router.get('/auth-redirect', async (req: express.Request<any, any, any, AuthRedirectRequestQs>, res: ResponseWithLayout) => {
