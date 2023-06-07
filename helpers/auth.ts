@@ -4,7 +4,7 @@ import type { Signatory } from '../models/signatory';
 /**
  * Builds the URL for requesting the Stack Exchange's oauth endpoint
  */
-export const getAuthRedirectURL = (
+export const getAuthURL = (
     config: Config,
     signatory: Signatory,
     letter: string
