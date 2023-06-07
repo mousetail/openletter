@@ -1,5 +1,10 @@
 import * as et from 'express';
 
+interface SignRequestBody {
+    display_name?: string;
+    letter?: string;
+}
+
 interface ResponseWithLayout extends et.Response {
     statusCode: number;
 

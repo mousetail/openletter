@@ -4,7 +4,7 @@ import { URLSearchParams } from 'url';
 import { render, error } from '../render_helpers';
 import config from '../config/config';
 import { Signatory } from '../models/signatory';
-import { ResponseWithLayout } from '../definitions';
+import type { ResponseWithLayout, SignRequestBody } from '../definitions';
 import crypto from 'crypto';
 import type { Debugger } from 'debug'
 const fetch = require('node-fetch');
@@ -37,7 +37,7 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
         res.redirect('/icon.png');
     });
 
-    router.post('/sign', async (req: express.Request, res: ResponseWithLayout) => {
+    router.post('/sign', async (req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {
         const displayName = req.body['display_name'] || null;
         const letter = req.body['letter'] || 'main';
         if (displayName.indexOf('♦') !== -1) {
