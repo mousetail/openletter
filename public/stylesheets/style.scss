@@ -4,8 +4,8 @@
 body {
     --header-height: 58px;
     padding-top: var(--header-height);
-    background: #EEE;
-    font-family: 'Open Sans', sans-serif;
+    background: #eee;
+    font-family: "Open Sans", sans-serif;
     font-size: 11pt;
 }
 
@@ -34,9 +34,10 @@ p {
     line-height: 1.6;
 }
 
-ol, ul {
+ol,
+ul {
     margin-bottom: 1.5rem;
-    
+
     li {
         margin-bottom: 0.3em;
         line-height: 1.35;
@@ -48,16 +49,29 @@ hr {
 }
 
 .color-mode-toggle {
-    background: #222;
-    border: 1px solid white;
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+
+    .fa-sun {
+        display: none;
+        font-size: 11pt;
+    }
+    .fa-moon {
+        display: block;
+        font-size: 9pt;
+    }
 }
 
 /* Offset anchors for fixed header https://stackoverflow.com/a/24298427 */
 [id]::before {
-    content: '';
+    content: "";
     display: block;
     height: calc(var(--header-height) + 1.5rem);
     /* fixed header height + padding */
@@ -72,27 +86,33 @@ header {
     left: 0;
     right: 0;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: var(--header-height);
     overflow: hidden;
+
     background-color: #17a7db;
-    background-image: url('https://cdn.sstatic.net/Sites/stackexchangemeta/img/background.svg');
+    background-image: url("https://cdn.sstatic.net/Sites/stackexchangemeta/img/background.svg");
     background-position: center left;
     background-repeat: repeat;
     background-size: auto;
 
     .header-inner {
-        background-color: transparent;
-        background-image: url('https://cdn.sstatic.net/Sites/stackexchangemeta/img/icon-cloud-footer@2.png');
-        background-position: bottom -68px right;
-        background-repeat: no-repeat;
-        background-size: 475px;
-        padding: 1.2rem 2rem;
-        font-family: 'Montserrat', sans-serif;
-        color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        height: 100%;
+        padding: 0.5rem 2rem;
+        font-family: "Montserrat", sans-serif;
+        color: white;
+
+        background-color: transparent;
+        background-image: url("https://cdn.sstatic.net/Sites/stackexchangemeta/img/icon-cloud-footer@2.png");
+        background-position: bottom right;
+        background-repeat: no-repeat;
+        background-size: 475px;
 
         .header-nav {
             text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
@@ -124,7 +144,7 @@ header {
 }
 
 .content-container:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -135,23 +155,22 @@ header {
 }
 
 aside {
-    color: #737063;
-    background: #FFF8DC;
-    padding: 1.7em 2em 1.7em;
     display: flex;
     align-items: center;
+    padding: 1.7em 2em 1.7em;
     border-bottom: 1px solid #e6dfc6;
+    font-size: 10pt;
+    color: #737063;
+    background: #fff8dc;
 
-    &>i:first-child {
+    & > i:first-child {
         margin-right: 1rem;
+        font-size: 1rem;
     }
 
-    p {
-        font-size: 0.9em;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
+    & > :last-child,
+    p:last-child {
+        margin-bottom: 0;
     }
 }
 
@@ -203,7 +222,7 @@ label {
 
 section.signatories {
     h5 {
-        font-family: 'Open Sans';
+        font-family: "Open Sans";
         font-style: italic;
         color: #555;
         margin: 0.5em 0 1em 0;
@@ -215,7 +234,7 @@ section.signatories {
 
         a {
             display: inline-block;
-            border: 1px solid #DDD;
+            border: 1px solid #ddd;
             border-top: 1px solid white;
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
@@ -230,7 +249,7 @@ section.signatories {
     grid-template-columns: repeat(2, 1fr);
     max-height: 25em;
     overflow-y: scroll;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #ddd;
 
     &.expanded {
         max-height: unset;
@@ -264,7 +283,7 @@ section.signatories {
         min-width: 0;
 
         &:hover {
-            background: #EEE;
+            background: #eee;
         }
     }
 }
@@ -283,7 +302,6 @@ section.signing {
 }
 
 section.faq {
-
     h4 {
         margin-top: 1.3em;
         margin-bottom: 1rem;
@@ -309,7 +327,7 @@ section.faq {
         }
     }
 
-    .content-container>aside {
+    .content-container > aside {
         display: none;
     }
 }

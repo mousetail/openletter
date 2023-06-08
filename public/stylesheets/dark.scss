@@ -6,13 +6,21 @@ body {
 }
 
 .color-mode-toggle {
-    background: white;
-    border: 1px solid #444;
+    background: #eee;
+    color: #222;
+    border: none;
+
+    .fa-sun {
+        display: block;
+    }
+    .fa-moon {
+        display: none;
+    }
 }
 
 main {
     background: #333;
-    color: #CCC;
+    color: #ccc;
 }
 
 aside {
@@ -36,7 +44,7 @@ aside.danger {
 }
 
 section.signatories h5 {
-    color: #AAA;
+    color: #aaa;
 }
 
 .signatory-panel p:hover {
@@ -72,7 +80,7 @@ a {
 }
 
 hr {
-    border-top: 1px solid rgba(255, 255, 255, .1)
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 section.signatories .expand a {
