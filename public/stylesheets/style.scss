@@ -280,16 +280,12 @@ section.signatories {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @media screen and (min-width: 840px) {
+    @media screen and (min-width: 760px) {
         grid-template-columns: repeat(4, 1fr);
     }
 
-    @media screen and (min-width: 1080px) {
+    @media screen and (min-width: 960px) {
         grid-template-columns: repeat(5, 1fr);
-    }
-
-    @media screen and (min-width: 16000px) {
-        grid-template-columns: repeat(6, 1fr);
     }
 
     p {
