@@ -4,18 +4,7 @@
         <p>If you support the sentiments we've expressed in this letter, you can sign it too to demonstrate your
             support to those striking.</p>
 
-        <input type="hidden" name="letter" value="<%= letter %>" />
-
-        <div class="form-group">
-            <label for="display-name">Display name<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="display_name" id="display-name" required />
-            <small class="form-text text-muted">Please enter your name as you wish it to appear in your signature.
-                <strong>This will be public.</strong></small>
-        </div>
-
-        <button type="submit" class="btn btn-lg btn-primary px-4">Sign</button>
-
-        <aside class="danger mt-4">
+        <aside class="danger">
             <i class="fas fa-exclamation-triangle"></i>
             <div>
                 When you click Sign, you will be taken to authenticate with your Stack&nbsp;Exchange account. This
@@ -26,7 +15,7 @@
             </div>
         </aside>
         
-        <aside class="mt-2">
+        <aside class="my-3">
             <i class="fas fa-info-circle"></i>
             <div>
                 If you're a moderator or employee, your signature will have a ♦ shown next to it automatically. If
@@ -35,5 +24,16 @@
                     href="https://chat.stackexchange.com/users/490835/mousetail">Mousetail</a>.
             </div>
         </aside>
+
+        <div class="form-group mt-4">
+            <label for="display-name">Display name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="display_name" id="display-name" required />
+            <small class="form-text text-muted">Please enter your name as you wish it to appear in your signature.
+                <strong>This will be public.</strong></small>
+        </div>
+
+        <input type="hidden" name="letter" value="<%= letter %>" />
+
+        <button type="submit" class="btn btn-primary px-5">Sign</button>
     </form>
 </section>
