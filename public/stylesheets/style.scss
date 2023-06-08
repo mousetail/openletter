@@ -325,14 +325,24 @@ section.faq {
 }
 
 .footer {
-    padding-top: 0.8rem;
-    padding-bottom: 1.5rem;
+    max-width: 960px;
+    width: 100%;
+    margin: 1.8rem auto 3rem;
+    padding: 0 1.5rem;
     text-align: center;
     font-size: 10pt;
     line-height: 1.35;
 }
 
 @media print {
+    body {
+        padding-top: 0;
+    }
+
+    header {
+        display: none;
+    }
+
     section.signing {
         display: none;
     }
