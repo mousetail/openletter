@@ -20,7 +20,7 @@ $(() => {
 
       // Add event listener to toggle dark mode
       document.addEventListener('click', evt => {
-        if (evt.target?.classList.contains('color-mode-toggle')) {
+        if (evt.target.classList.contains('color-mode-toggle')) {
           this.toggleDarkMode();
         }
       });
