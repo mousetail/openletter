@@ -49,11 +49,24 @@ hr {
 }
 
 .color-mode-toggle {
-    background: #222;
-    border: 1px solid white;
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+
+    .fa-sun {
+        display: none;
+        font-size: 11pt;
+    }
+    .fa-moon {
+        display: block;
+        font-size: 9pt;
+    }
 }
 
 /* Offset anchors for fixed header https://stackoverflow.com/a/24298427 */
@@ -73,9 +86,13 @@ header {
     left: 0;
     right: 0;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: var(--header-height);
     overflow: hidden;
+
     background-color: #17a7db;
     background-image: url("https://cdn.sstatic.net/Sites/stackexchangemeta/img/background.svg");
     background-position: center left;
@@ -83,17 +100,19 @@ header {
     background-size: auto;
 
     .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        padding: 0.5rem 2rem;
+        font-family: "Montserrat", sans-serif;
+        color: white;
+
         background-color: transparent;
         background-image: url("https://cdn.sstatic.net/Sites/stackexchangemeta/img/icon-cloud-footer@2.png");
         background-position: bottom right;
         background-repeat: no-repeat;
         background-size: 475px;
-        padding: 1.2rem 2rem;
-        font-family: "Montserrat", sans-serif;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
 
         .header-nav {
             text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
@@ -136,23 +155,22 @@ header {
 }
 
 aside {
-    color: #737063;
-    background: #fff8dc;
-    padding: 1.7em 2em 1.7em;
     display: flex;
     align-items: center;
+    padding: 1.7em 2em 1.7em;
     border-bottom: 1px solid #e6dfc6;
+    font-size: 10pt;
+    color: #737063;
+    background: #fff8dc;
 
     & > i:first-child {
         margin-right: 1rem;
+        font-size: 1rem;
     }
 
-    p {
-        font-size: 0.9em;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
+    & > :last-child,
+    p:last-child {
+        margin-bottom: 0;
     }
 }
 
