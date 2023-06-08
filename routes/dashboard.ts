@@ -4,9 +4,10 @@ import { URLSearchParams } from 'url';
 import { render, error } from '../render_helpers';
 import config from '../config/config';
 import { Signatory } from '../models/signatory';
-import { ResponseWithLayout } from '../definitions';
+import type { AuthRedirectRequestQs, ResponseWithLayout, SignRequestBody } from '../definitions';
 import crypto from 'crypto';
 import type { Debugger } from 'debug'
+import { getAuthURL } from '../helpers/auth';
 const fetch = require('node-fetch');
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -37,7 +38,7 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
         res.redirect('/icon.png');
     });
 
-    router.post('/sign', async (req: express.Request, res: ResponseWithLayout) => {
+    router.post('/sign', async (req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {
         const displayName = req.body['display_name'] || null;
         const letter = req.body['letter'] || 'main';
         if (displayName.indexOf('♦') !== -1) {
@@ -49,12 +50,12 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
             return;
         }
         const signatory: Signatory = await <Promise<Signatory>>Signatory.create({ display_name: displayName, letter });
-        res.redirect(`https://stackexchange.com/oauth?client_id=${config.getSiteSetting('clientId')}&scope=&state=${signatory.id}|${letter}&redirect_uri=${config.getSiteSetting('redirectUri')}`);
+        res.redirect(getAuthURL(config, signatory, letter));
     });
 
-    router.get('/auth-redirect', async (req: express.Request, res: ResponseWithLayout) => {
-        const code = req.query['code'] as string;
-        const state = req.query['state'] as string;
+    router.get('/auth-redirect', async (req: express.Request<any, any, any, AuthRedirectRequestQs>, res: ResponseWithLayout) => {
+        const code = req.query['code'];
+        const state = req.query['state'];
         const signatoryId = state.split('|')[0];
         const letter = state.split('|')[1];
 
