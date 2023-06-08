@@ -288,7 +288,7 @@ section.signatories {
         grid-template-columns: repeat(5, 1fr);
     }
 
-    p {
+    & > p {
         display: block;
         transition: all 0.2s ease;
         padding: 0.5em;
@@ -337,10 +337,11 @@ section.faq {
 @media print {
     body {
         padding-top: 0;
+        background-color: #f8f8f8;
     }
 
     header {
-        display: none;
+        position: static;
     }
 
     section.signing {
@@ -351,13 +352,22 @@ section.faq {
         page-break-inside: avoid;
 
         .signatory-panel {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 1fr) !important;
             max-height: unset;
             overflow-y: hidden;
+            border-bottom: none;
+
+            & > p {
+                page-break-inside: avoid;
+            }
         }
 
         .expand {
             display: none;
+
+            .js-expand-signatories {
+                display: none;
+            }
         }
     }
 
