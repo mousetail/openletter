@@ -1,4 +1,15 @@
 import * as et from 'express';
+import type { ParsedQs } from 'qs';
+
+interface AuthRedirectRequestQs extends ParsedQs {
+    code: string;
+    state: string;
+}
+
+interface SignRequestBody {
+    display_name?: string;
+    letter?: string;
+}
 
 interface ResponseWithLayout extends et.Response {
     statusCode: number;
