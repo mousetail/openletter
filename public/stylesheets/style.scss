@@ -48,6 +48,10 @@ hr {
     margin: 1.5rem 0;
 }
 
+.fa, .fas {
+    pointer-events: none;
+}
+
 .color-mode-toggle {
     display: flex;
     align-items: center;
