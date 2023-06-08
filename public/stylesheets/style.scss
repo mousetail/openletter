@@ -1,4 +1,9 @@
+// Important: When editing this file change the version number in views/layouts/application.ejs
+// Otherwise people will still have the old version cached
+
 body {
+    --header-height: 58px;
+    padding-top: var(--header-height);
     background: #EEE;
     font-family: 'Open Sans', sans-serif;
     font-size: 11pt;
@@ -8,7 +13,18 @@ small {
     font-size: 10pt;
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-bottom: 0.5em;
     line-height: 1.4;
 }
@@ -18,9 +34,13 @@ p {
     line-height: 1.6;
 }
 
-li {
-    margin-bottom: 0.3em;
-    line-height: 1.35;
+ol, ul {
+    margin-bottom: 1.5rem;
+    
+    li {
+        margin-bottom: 0.3em;
+        line-height: 1.35;
+    }
 }
 
 hr {
@@ -28,14 +48,33 @@ hr {
 }
 
 .color-mode-toggle {
-    background: #444;
+    background: #222;
     border: 1px solid white;
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     cursor: pointer;
 }
 
+/* Offset anchors for fixed header https://stackoverflow.com/a/24298427 */
+[id]::before {
+    content: '';
+    display: block;
+    height: calc(var(--header-height) + 1.5rem);
+    /* fixed header height + padding */
+    margin-top: calc(-1 * (var(--header-height) + 1.5rem));
+    /* (negative of) fixed header height + padding */
+    visibility: hidden;
+}
+
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    height: var(--header-height);
+    overflow: hidden;
     background-color: #17a7db;
     background-image: url('https://cdn.sstatic.net/Sites/stackexchangemeta/img/background.svg');
     background-position: center left;
@@ -48,11 +87,35 @@ header {
         background-position: bottom -68px right;
         background-repeat: no-repeat;
         background-size: 475px;
-        padding: 2em;
+        padding: 1.2rem 2rem;
         font-family: 'Montserrat', sans-serif;
         color: white;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
+
+        .header-nav {
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+
+            ul {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                li {
+                    margin: 0 0.8em 0 0;
+                    padding: 0;
+
+                    a {
+                        padding: 0.5em 0em;
+                        color: white !important; // override dark mode link color
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -74,15 +137,21 @@ header {
 aside {
     color: #737063;
     background: #FFF8DC;
-    padding: 1.7em 2em 1.7em 1.5em;
+    padding: 1.7em 2em 1.7em;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e6dfc6;
 
+    &>i:first-child {
+        margin-right: 1rem;
+    }
+
     p {
         font-size: 0.9em;
-        margin-bottom: 0;
-        margin-left: 1em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 
@@ -163,6 +232,11 @@ section.signatories {
     overflow-y: scroll;
     border-bottom: 1px solid #DDD;
 
+    &.expanded {
+        max-height: unset;
+        overflow-y: hidden;
+    }
+
     @media screen and (min-width: 600px) {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -241,32 +315,9 @@ section.faq {
 }
 
 .footer {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 1.5rem;
     text-align: center;
-    font-size: 0.88rem;
-}
-
-@media (max-width: 500px) {
-    nav {
-        display: none;
-    }
-}
-
-nav.left-sidebar {
-    position: fixed;
-    left: 0;
-    top: 5rem;
-    display: block;
-
-    ul {
-        margin: 0;
-        padding: 0.5rem;
-
-        li {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-    }
+    font-size: 10pt;
+    line-height: 1.35;
 }

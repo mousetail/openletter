@@ -17,8 +17,8 @@
         crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:400,400i,600|Fira+Sans&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/dark.css" media="(prefers-color-scheme:dark)" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css?2" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/dark.css?2" media="(prefers-color-scheme:dark)" />
 
     <script type="application/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -36,7 +36,23 @@
 <body>
     <header>
         <div class="header-inner col-12 col-xl-6 col-lg-8 col-md-10 mx-auto">
-            <div class="color-mode-toggle" title="Toggle light/dark mode"></div>
+            <nav class="header-nav">
+                <ul>
+                    <li>
+                        <a href="/#letter">Letter</a>
+                    </li>
+                    <li>
+                        <a href="/#signatures">Signatures</a>
+                    </li>
+                    <li>
+                        <a href="/#sign">Sign</a>
+                    </li>
+                    <li>
+                        <a href="/#faq">FAQ</a>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" class="color-mode-toggle" title="Toggle light/dark mode"></button>
         </div>
     </header>
     <div class="content-container col-12 col-xl-6 col-lg-8 col-md-10 mx-auto">
@@ -62,20 +78,6 @@
             <%- content %>
         </main>
     </div>
-
-    <nav class="left-sidebar d-none d-md-block">
-        <ul>
-            <li>
-                <a href="#letter">Letter</a>
-            </li>
-            <li>
-                <a href="#signatures">Signatures</a>
-            </li>
-            <li>
-                <a href="#faq">FAQ</a>
-            </li>
-        </ul>
-    </nav>
 
     <div class="footer m-3 mt-4 text-muted">
         This page was originally designed by <a href="https://github.com/ArtOfCode-">ArtOfCode</a>. If you see a
