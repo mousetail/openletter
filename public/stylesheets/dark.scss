@@ -2,7 +2,7 @@
 // Otherwise people will still have the old version cached
 
 body {
-    background: #444 !important;
+    background: #222;
 }
 
 .color-mode-toggle {
@@ -20,7 +20,7 @@ body {
 
 main {
     background: #333;
-    color: #ccc;
+    color: #ddd;
 }
 
 aside {
@@ -39,6 +39,10 @@ aside.danger {
     color: #d9d9d9;
 }
 
+header {
+    filter: brightness(0.8) contrast(1.2);
+}
+
 .content-container:after {
     box-shadow: 0 0 0.5em #111;
 }
@@ -52,16 +56,16 @@ section.signatories h5 {
 }
 
 .text-muted {
-    color: #8f979e !important;
+    color: #8f979e !important; // Override !important in bootstrap
 }
 
 a {
-    color: #3396ff !important;
+    color: #3396ff;
 }
 
 .btn-primary {
-    background: #3396ff !important;
-    border-color: #3396ff !important;
+    background: #3396ff;
+    border-color: #3396ff;
 }
 
 .form-control {

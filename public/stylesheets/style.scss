@@ -164,13 +164,24 @@ aside {
     background: #fff8dc;
 
     & > i:first-child {
-        margin-right: 1rem;
-        font-size: 1rem;
+        margin-right: 1.2rem;
+        font-size: 1.2rem;
     }
 
     & > :last-child,
     p:last-child {
         margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 425px) {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+
+        & > i:first-child {
+            margin-right: 0;
+            margin-bottom: 0.8rem;
+        }
     }
 }
 
