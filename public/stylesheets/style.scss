@@ -264,6 +264,12 @@ section.signatories {
     }
 }
 
+select {
+    background-color: white;
+    border: none;
+    color: #555;
+}
+
 .signatory-header {
     align-items: end;
     display: flex;
@@ -286,11 +292,6 @@ section.signatories {
     legend {
         font-size: 10pt;
         margin: 0 0 0 5px;
-    }
-
-    select {
-        border: none;
-        color: #555;
     }
 }
 
