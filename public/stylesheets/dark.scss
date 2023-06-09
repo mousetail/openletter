@@ -5,62 +5,24 @@ body {
     background: #222;
 }
 
-.color-mode-toggle {
-    background: #eee;
-    color: #222;
-    border: none;
+a {
+    color: #3396ff;
 
-    .fa-sun {
-        display: block;
-    }
-    .fa-moon {
-        display: none;
+    &:hover {
+        color: #66b0ff;
     }
 }
 
-main {
-    background: #333;
-    color: #ddd;
-}
-
-aside {
-    background: #453700;
-    color: #ddd;
-    border-color: #666;
-}
-
-aside.danger {
-    background-color: #4f0000;
-    color: #ddd;
-    border-color: #666;
-}
-
-.text-muted a {
-    color: #d9d9d9;
-}
-
-header {
-    filter: brightness(0.8) contrast(1.2);
-}
-
-.content-container:after {
-    box-shadow: 0 0 0.5em #111;
-}
-
-section.signatories h5 {
-    color: #aaa;
-}
-
-.signatory-panel p:hover {
-    background: #444;
+hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .text-muted {
     color: #8f979e !important; // Override !important in bootstrap
-}
 
-a {
-    color: #3396ff;
+    a {
+        color: #0074f0;
+    }
 }
 
 .btn-primary {
@@ -79,14 +41,62 @@ a {
     }
 }
 
+.color-mode-toggle {
+    background: #eee;
+    color: #222;
+    border: none;
+
+    .fa-sun {
+        display: block;
+    }
+    .fa-moon {
+        display: none;
+    }
+}
+
+aside {
+    background: #453700;
+    color: #ddd;
+    border-color: #666;
+
+    &.danger {
+        background-color: #4f0000;
+        color: #ddd;
+        border-color: #666;
+    }
+}
+
+main {
+    background: #333;
+    color: #ddd;
+}
+
+header {
+    filter: brightness(0.8) contrast(1.2);
+}
+
+.content-container {
+    box-shadow: 0 0 0.5em #111;
+}
+
+section.signatories {
+    h5 {
+        color: #aaa;
+    }
+    .expand {
+        box-shadow: inset 0px 7px 5px -3px rgba(255, 255, 255, 0.1);
+
+        a {
+            border-top: 1px solid #333;
+            background-color: #333;
+        }
+    }
+}
+
+.signatory-panel > p:hover {
+    background: #444;
+}
+
 .footer {
     color: white;
-}
-
-hr {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-section.signatories .expand a {
-    border-top: 1px solid #333;
 }

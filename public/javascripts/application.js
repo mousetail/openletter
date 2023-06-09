@@ -64,7 +64,7 @@ $(() => {
       panelElem.classList.toggle('expanded', !isExpanded);
 
       // Toggle the link text
-      toggleElem.innerHTML = isExpanded ? toggleElem.dataset.originalHtml : 'Contract <i class="fa-arrow-up fas"></i>';
+      toggleElem.innerHTML = isExpanded ? toggleElem.dataset.originalHtml : 'Collapse <i class="fa-arrow-up fas"></i>';
     },
 
     init() {
