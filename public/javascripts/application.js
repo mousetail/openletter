@@ -81,8 +81,6 @@ $(() => {
         return;
       }
 
-      sortPanelElem.classList.add('hidden');
-
       // Store original text and signatory count
       toggleElem.dataset.originalHtml = toggleElem.innerHTML;
 
