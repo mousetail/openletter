@@ -351,6 +351,10 @@ section.faq {
     section.signatories {
         page-break-inside: avoid;
 
+        .signatory-sort {
+            display: none;
+        }
+
         .signatory-panel {
             grid-template-columns: repeat(4, 1fr);
             max-height: unset;
