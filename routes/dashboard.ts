@@ -4,7 +4,15 @@ import { URLSearchParams } from 'url';
 import { render, error } from '../render_helpers';
 import config from '../config/config';
 import { Signatory } from '../models/signatory';
-import type { AuthRedirectRequestQs, MainRequestQs, SortType, ResponseWithLayout, SignRequestBody } from '../definitions';
+import type {
+    AuthRedirectRequestQs,
+    MainRequestQs,
+    SortType,
+    ResponseWithLayout,
+    SignRequestBody,
+    SaveSortRequestBody,
+    SortOrder
+} from '../definitions';
 import crypto from 'crypto';
 import type { Debugger } from 'debug'
 import { getAuthURL } from '../helpers/auth';
@@ -15,7 +23,7 @@ const minimumDate = new Date('2023-06-05T04:00:00Z')
 
 export default (pool: mt.Pool, _log: Debugger): express.Router => {
     router.get('/', async (req: express.Request<any, any, any, MainRequestQs>, res: ResponseWithLayout) => {
-        const { order = 'asc', sort = 'alpha' } = req.query;
+        const { order = 'asc', sort = 'alpha' } = req.cookies;
 
         const builder = Signatory.where(`se_acct_id IS NOT NULL AND letter = 'main'`);
 
@@ -49,6 +57,17 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
 
     router.get('/favicon.ico', async (_req: express.Request, res: ResponseWithLayout) => {
         res.redirect('/icon.png');
+    });
+
+    router.post('/save-sort', async (req: express.Request<any, any, SaveSortRequestBody>, res: express.Response) => {
+        const { order = 'asc', sort = 'alpha' } = req.body;
+
+        const availableSortOrders: SortOrder[] = ['asc', 'desc'];
+        const availableSortTypes: SortType[] = ['alpha', 'date_signed'];
+
+        res.cookie('order', availableSortOrders.includes(order) ? order : 'asc');
+        res.cookie('sort', availableSortTypes.includes(sort) ? sort : 'alpha');
+        res.redirect( '/' );
     });
 
     router.post('/sign', async (req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {

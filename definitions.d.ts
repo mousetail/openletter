@@ -15,6 +15,11 @@ interface MainRequestQs extends ParsedQs {
     sort?: SortType;
 }
 
+interface SaveSortRequestBody {
+    order?: SortOrder;
+    sort?: SortType;
+}
+
 interface SignRequestBody {
     display_name?: string;
     letter?: string;
