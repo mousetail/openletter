@@ -51,6 +51,13 @@ section.signatories h5 {
     color: #aaa;
 }
 
+.signatory-sort > form {
+    select {
+        background-color: #333;
+        color: #ddd;
+    }
+}
+
 .signatory-panel p:hover {
     background: #444;
 }
