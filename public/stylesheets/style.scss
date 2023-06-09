@@ -263,6 +263,12 @@ section.signatories {
     margin: 0.5em 0 1em 0;
 }
 
+.signatory-sort {
+    &.hidden {
+        visibility: hidden;
+    }
+}
+
 .signatory-sort > form {
     display: flex;
     gap: 0.5rem;
