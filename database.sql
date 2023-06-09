@@ -10,19 +10,6 @@ create table if not exists `metadata` (
     index index_metadata_on_name (`name`)
 ) character set utf8mb4 collate utf8mb4_unicode_ci;
 
-create table if not exists `users` (
-    `id` bigint primary key auto_increment,
-    `username` varchar(255) not null,
-    `email` varchar(255) not null,
-    `password` varchar(255) not null,
-    `site_admin` tinyint(1) not null default 0,
-    `created_at` datetime not null default current_timestamp,
-    `updated_at` datetime not null default current_timestamp,
-
-    constraint unique_users_email unique (`email`),
-    index index_users_on_email (`email`)
-) character set utf8mb4 collate utf8mb4_unicode_ci;
-
 create table if not exists `signatories` (
     `id` bigint primary key auto_increment,
     `letter` varchar(10) not null default 'main',
