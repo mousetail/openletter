@@ -39,7 +39,7 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
         });
         const etag = crypto.createHash('sha256').update(`${config.getSiteSetting('letterVersion')}-${signatories.length}`).digest('hex');
         res.setHeader('ETag', etag);
-        render(req, res, 'dashboard/dash', { signatories }, { pool });
+        render(req, res, 'dashboard/dash', { order, sort, signatories }, { pool });
     });
 
 
