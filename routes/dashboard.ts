@@ -66,8 +66,8 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
         const availableSortOrders: SortOrder[] = ['asc', 'desc'];
         const availableSortTypes: SortType[] = ['alpha', 'date_signed', 'random'];
 
-        res.cookie('order', availableSortOrders.includes(order) ? order : 'asc');
-        res.cookie('sort', availableSortTypes.includes(sort) ? sort : 'random');
+        res.cookie('order', availableSortOrders.includes(order) ? order : 'asc', { httpOnly: true });
+        res.cookie('sort', availableSortTypes.includes(sort) ? sort : 'random', { httpOnly: true });
         res.redirect('/');
     });
 
