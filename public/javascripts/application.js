@@ -18,12 +18,13 @@ $(() => {
         // ignore
       }
 
-      // Add event listener to toggle dark mode
-      document.addEventListener('click', evt => {
-        if (evt.target?.classList.contains('color-mode-toggle')) {
-          this.toggleDarkMode();
-        }
-      });
+      const switchBtn = document.querySelector('.color-mode-toggle');
+
+      if(switchBtn) {
+        switchBtn.addEventListener('click', () => {
+            this.toggleDarkMode();
+          });
+      }
     },
 
     switchMode(darkMode) {
@@ -31,6 +32,12 @@ $(() => {
 
       if (link) {
         link.disabled = !darkMode;
+
+        if(darkMode) {
+            link.removeAttribute('media');
+        } else {
+            link.setAttribute('media', '(prefers-color-scheme:dark)');
+        }
       }
 
       this.darkMode = darkMode;
