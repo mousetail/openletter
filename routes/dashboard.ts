@@ -23,7 +23,8 @@ const minimumDate = new Date('2023-06-05T04:00:00Z')
 
 export default (pool: mt.Pool, _log: Debugger): express.Router => {
     router.get('/', async (req: express.Request<any, any, any, MainRequestQs>, res: ResponseWithLayout) => {
-        const { order = 'asc', sort = 'random' } = req.cookies;
+        const order = req.query.order || req.cookies.order || 'asc';
+        const sort = req.query.sort || req.cookies.sort || 'random';
 
         const builder = Signatory.where(`se_acct_id IS NOT NULL AND letter = 'main'`);
 
