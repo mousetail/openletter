@@ -52,10 +52,11 @@ $(() => {
   // Panel component
   const panel = {
     panelElem: document.querySelector('.signatory-panel'),
+    sortPanelElem: document.querySelector('.signatory-sort'),
     toggleElem: document.querySelector('.js-expand-signatories'),
 
     togglePanel() {
-      const { panelElem, toggleElem } = this;
+      const { panelElem, sortPanelElem, toggleElem } = this;
 
       // Get state of panel from the existence of "expanded" class
       const isExpanded = panelElem.classList.contains('expanded');
@@ -63,16 +64,20 @@ $(() => {
       // Toggle the panel "expanded" class
       panelElem.classList.toggle('expanded', !isExpanded);
 
+      if(sortPanelElem) {
+        sortPanelElem.classList.toggle('hidden', isExpanded);
+      }
+
       // Toggle the link text
       toggleElem.innerHTML = isExpanded ? toggleElem.dataset.originalHtml : 'Collapse <i class="fa-arrow-up fas"></i>';
     },
 
     init() {
-      const { panelElem, toggleElem } = this;
+      const { panelElem, sortPanelElem, toggleElem } = this;
 
       // Both panel or toggle element must exist
-      if (!panelElem || !toggleElem) {
-        console.error('Missing panel or toggle element');
+      if (!panelElem || !sortPanelElem || !toggleElem) {
+        console.error('Missing panels or toggle element');
         return;
       }
 

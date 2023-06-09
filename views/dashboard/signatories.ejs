@@ -1,6 +1,23 @@
 <section class="signatories" id="signatures">
-    <h5>Signed,</h5>
-
+    <div class="signatory-header">
+        <h5>Signed,</h5>
+        <div class="signatory-sort border hidden rounded px-1">
+            <form name="signatory-sort" method="post" action="/save-sort">
+                <select name="sort">
+                    <option value="" disabled>Sort By</option>
+                    <option value="alpha" <%= sort === 'alpha' ? 'selected' : '' %>>Display name</option>
+                    <option value="date_signed" <%= sort === 'date_signed' ? 'selected' : '' %>>Date signed</option>
+                    <option value="random" <%= sort === 'random' ? 'selected' : '' %>>Randomized</option>
+                </select>
+                <select name="order">
+                    <option value="" disabled>Order</option>
+                    <option value="asc" <%= order === 'asc' ? 'selected' : '' %>>Ascending</option>
+                    <option value="desc"<%= order === 'desc' ? 'selected' : '' %>>Descending</option>
+                </select>
+                <button type="submit" class="btn btn-link btn-sm px-1">Save</button>
+            </form>
+        </div>
+    </div>
     <div class="signatory-panel">
         <% signatories.forEach(sig=> { %>
             <p>

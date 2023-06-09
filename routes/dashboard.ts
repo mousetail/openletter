@@ -4,7 +4,15 @@ import { URLSearchParams } from 'url';
 import { render, error } from '../render_helpers';
 import config from '../config/config';
 import { Signatory } from '../models/signatory';
-import type { AuthRedirectRequestQs, ResponseWithLayout, SignRequestBody } from '../definitions';
+import type {
+    AuthRedirectRequestQs,
+    MainRequestQs,
+    SortType,
+    ResponseWithLayout,
+    SignRequestBody,
+    SaveSortRequestBody,
+    SortOrder
+} from '../definitions';
 import crypto from 'crypto';
 import type { Debugger } from 'debug'
 import { getAuthURL } from '../helpers/auth';
@@ -14,10 +22,25 @@ const router = express.Router(); // eslint-disable-line new-cap
 const minimumDate = new Date('2023-06-05T04:00:00Z')
 
 export default (pool: mt.Pool, _log: Debugger): express.Router => {
-    router.get('/', async (req: express.Request, res: ResponseWithLayout) => {
-        const signatories = (
-            await Signatory.where(`se_acct_id IS NOT NULL AND letter = 'main'`).order('is_moderator DESC, is_former_moderator DESC, RAND()', '', true).get()
-        ).map((signatory: Signatory) => {
+    router.get('/', async (req: express.Request<any, any, any, MainRequestQs>, res: ResponseWithLayout) => {
+        const order = req.query.order || req.cookies.order || 'asc';
+        const sort = req.query.sort || req.cookies.sort || 'random';
+
+        const builder = Signatory.where(`se_acct_id IS NOT NULL AND letter = 'main'`);
+
+        const sortQ: Record<SortType, string> = {
+            'alpha': 'is_moderator DESC, is_former_moderator DESC, display_name',
+            'date_signed': 'is_moderator DESC, is_former_moderator DESC, created_at',
+            'random': 'is_moderator DESC, is_former_moderator DESC, RAND()',
+        };
+
+        const entities = await builder.order(
+            sort in sortQ ? sortQ[sort] : sortQ.random,
+            sort === 'random' ? '' : order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC',
+            true
+        ).get()
+
+        const signatories = entities.map((signatory: Signatory) => {
             return {
                 ...signatory,
                 created_at: signatory.created_at >= minimumDate ? signatory.created_at : minimumDate,
@@ -26,7 +49,7 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
         });
         const etag = crypto.createHash('sha256').update(`${config.getSiteSetting('letterVersion')}-${signatories.length}`).digest('hex');
         res.setHeader('ETag', etag);
-        render(req, res, 'dashboard/dash', { signatories }, { pool });
+        render(req, res, 'dashboard/dash', { order, sort, signatories }, { pool });
     });
 
 
@@ -36,6 +59,17 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
 
     router.get('/favicon.ico', async (_req: express.Request, res: ResponseWithLayout) => {
         res.redirect('/icon.png');
+    });
+
+    router.post('/save-sort', async (req: express.Request<any, any, SaveSortRequestBody>, res: express.Response) => {
+        const { order = 'asc', sort = 'random' } = req.body;
+
+        const availableSortOrders: SortOrder[] = ['asc', 'desc'];
+        const availableSortTypes: SortType[] = ['alpha', 'date_signed', 'random'];
+
+        res.cookie('order', availableSortOrders.includes(order) ? order : 'asc', { httpOnly: true });
+        res.cookie('sort', availableSortTypes.includes(sort) ? sort : 'random', { httpOnly: true });
+        res.redirect('/');
     });
 
     router.post('/sign', async (req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {

@@ -243,7 +243,7 @@ section.signatories {
         font-family: "Open Sans";
         font-style: italic;
         color: #555;
-        margin: 0.5em 0 1em 0;
+        margin: 0;
     }
 
     .expand {
@@ -261,6 +261,37 @@ section.signatories {
             padding: 0.5rem 2rem;
             background: white;
         }
+    }
+}
+
+select {
+    background-color: white;
+    border: none;
+    color: #555;
+}
+
+.signatory-header {
+    align-items: end;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0.5em 0 1em 0;
+}
+
+.signatory-sort {
+    &.hidden {
+        visibility: hidden;
+    }
+}
+
+.signatory-sort > form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: end;
+
+    legend {
+        font-size: 10pt;
+        margin: 0 0 0 5px;
     }
 }
 
@@ -350,6 +381,10 @@ section.faq {
 
     section.signatories {
         page-break-inside: avoid;
+
+        .signatory-sort {
+            display: none;
+        }
 
         .signatory-panel {
             grid-template-columns: repeat(4, 1fr) !important;

@@ -79,6 +79,17 @@ header {
     box-shadow: 0 0 0.5em #111;
 }
 
+section.signatories h5 {
+    color: #aaa;
+}
+
+.signatory-sort > form {
+    select {
+        background-color: #333;
+        color: #ddd;
+    }
+}
+
 section.signatories {
     h5 {
         color: #aaa;

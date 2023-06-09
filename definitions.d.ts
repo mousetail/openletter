@@ -1,9 +1,23 @@
 import * as et from 'express';
 import type { ParsedQs } from 'qs';
 
+type SortOrder = 'asc' | 'desc';
+
+type SortType = 'alpha' | 'date_signed' | 'random';
+
 interface AuthRedirectRequestQs extends ParsedQs {
     code: string;
     state: string;
+}
+
+interface MainRequestQs extends ParsedQs {
+    order?: SortOrder;
+    sort?: SortType;
+}
+
+interface SaveSortRequestBody {
+    order?: SortOrder;
+    sort?: SortType;
 }
 
 interface SignRequestBody {
