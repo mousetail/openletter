@@ -23,18 +23,19 @@ const minimumDate = new Date('2023-06-05T04:00:00Z')
 
 export default (pool: mt.Pool, _log: Debugger): express.Router => {
     router.get('/', async (req: express.Request<any, any, any, MainRequestQs>, res: ResponseWithLayout) => {
-        const { order = 'asc', sort = 'alpha' } = req.cookies;
+        const { order = 'asc', sort = 'random' } = req.cookies;
 
         const builder = Signatory.where(`se_acct_id IS NOT NULL AND letter = 'main'`);
 
         const sortQ: Record<SortType, string> = {
             'alpha': 'is_moderator DESC, is_former_moderator DESC, display_name',
-            'date_signed': 'is_moderator DESC, is_former_moderator DESC, created_at'
+            'date_signed': 'is_moderator DESC, is_former_moderator DESC, created_at',
+            'random': 'is_moderator DESC, is_former_moderator DESC, RAND()',
         };
 
         const entities = await builder.order(
-            sort in sortQ ? sortQ[sort] : sortQ.alpha,
-            order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC',
+            sort in sortQ ? sortQ[sort] : sortQ.random,
+            sort === 'random' ? '' : order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC',
             true
         ).get()
 
@@ -60,14 +61,14 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
     });
 
     router.post('/save-sort', async (req: express.Request<any, any, SaveSortRequestBody>, res: express.Response) => {
-        const { order = 'asc', sort = 'alpha' } = req.body;
+        const { order = 'asc', sort = 'random' } = req.body;
 
         const availableSortOrders: SortOrder[] = ['asc', 'desc'];
-        const availableSortTypes: SortType[] = ['alpha', 'date_signed'];
+        const availableSortTypes: SortType[] = ['alpha', 'date_signed', 'random'];
 
         res.cookie('order', availableSortOrders.includes(order) ? order : 'asc');
-        res.cookie('sort', availableSortTypes.includes(sort) ? sort : 'alpha');
-        res.redirect( '/' );
+        res.cookie('sort', availableSortTypes.includes(sort) ? sort : 'random');
+        res.redirect('/');
     });
 
     router.post('/sign', async (req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {

@@ -3,7 +3,7 @@ import type { ParsedQs } from 'qs';
 
 type SortOrder = 'asc' | 'desc';
 
-type SortType = 'alpha' | 'date_signed';
+type SortType = 'alpha' | 'date_signed' | 'random';
 
 interface AuthRedirectRequestQs extends ParsedQs {
     code: string;
