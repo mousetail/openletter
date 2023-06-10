@@ -13,7 +13,7 @@
         crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:400,400i,600|Fira+Sans&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css?6" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css?7" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/dark.css?6" media="(prefers-color-scheme:dark)" />
 
     <script type="application/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -44,9 +44,6 @@
                     <li>
                         <a href="/#faq">FAQ</a>
                     </li>
-                    <li>
-                        <a href="/privacy">Privacy</a>
-                    </li>
                 </ul>
             </nav>
             <button type="button" class="color-mode-toggle" title="Toggle light/dark mode"><i class="fa-sun fas"></i><i
@@ -76,13 +73,8 @@
             <%- content %>
         </main>
     </div>
-
-    <div class="footer m-3 mt-4 text-muted">
-        This page was originally designed by <a href="https://github.com/ArtOfCode-">ArtOfCode</a>. If you see a
-        mistake on this page consider contributing at
-        <a href="https://github.com/mousetail/openletter">mousetail/openletter</a>. Consider joining
-        <a href="https://discord.gg/abJWUdTF">the unofficial Stack Exchange meta discord</a> if you want to help out.
-    </div>
 </body>
+
+<%- include('../common/footer') %>
 
 </html>
