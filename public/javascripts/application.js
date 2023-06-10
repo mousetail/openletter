@@ -1,4 +1,4 @@
-$(() => {
+(() => {
 
   // Switcher component
   const switcher = {
@@ -14,40 +14,30 @@ $(() => {
           const darkMode = stored === 'true';
           this.switchMode(darkMode);
         }
-      } catch (e) {
-        // ignore
-      }
-
-      // Add event listener to toggle dark mode
-      document.addEventListener('click', evt => {
-        if (evt.target?.classList.contains('color-mode-toggle')) {
-          this.toggleDarkMode();
-        }
-      });
+      } catch (e) { } // ignore ls errors
     },
 
     switchMode(darkMode) {
       const link = document.querySelector('link[href*="dark.css"]');
+      if (!link) return; // no dark mode stylesheet, can't toggle
 
-      if (link) {
-        link.disabled = !darkMode;
-      }
-
+      link.disabled = !darkMode;
       this.darkMode = darkMode;
 
       // Save dark mode preference to local storage
       try {
         window.localStorage.setItem(this.darkModeKey, this.darkMode);
-      } catch (e) {
-        // ignore
-      }
+      } catch (e) { } // ignore ls errors
     },
 
     toggleDarkMode() {
       this.switchMode(!this.darkMode);
     }
   };
+  // Init immediately before page load to avoid light mode FOUC
+  // This script should be placed in the document head, after the dark mode stylesheet
   switcher.init();
+
 
   // Panel component
   const panel = {
@@ -89,5 +79,20 @@ $(() => {
       });
     }
   };
-  panel.init();
-});
+
+
+  // On document ready
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Initialize panel
+    panel.init();
+
+    // Add event listener to header for dark mode toggle
+    document.querySelector('header').addEventListener('click', evt => {
+      if (evt.target.classList.contains('color-mode-toggle')) {
+        switcher.toggleDarkMode();
+      }
+    });
+  });
+
+})();
