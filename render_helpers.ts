@@ -6,7 +6,6 @@ const renderLogger = createDebug('app:render');
 import {ResponseWithLayout} from './definitions';
 import et from 'express';
 import mt from 'mysql2';
-import {getUser} from './user_helpers';
 import viewHelpers from './view_helpers';
 import {BaseModel} from './models/base';
 
@@ -29,15 +28,6 @@ export const render = async (req: et.Request, res: ResponseWithLayout, view: str
   if (typeof (view) === 'string') {
     const fullLayout = `layouts/${layout || 'application'}`;
     renderLogger(`Rendering ${view} within ${fullLayout}.`);
-
-    // If we have a DB connection, use it to find whether a user is logged in.
-    if (pool) {
-      locals['current_user'] = await getUser(req, pool); // eslint-disable-line no-use-before-define
-    }
-    else {
-      // Set current_user anyway so that accessing it in a view is never a reference error.
-      locals['current_user'] = null;
-    }
 
     // Because the default layout requires a title but individual actions might not set it, make sure we have a default.
     locals['title'] = locals['title'] || '';

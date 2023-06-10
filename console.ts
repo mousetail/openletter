@@ -7,7 +7,6 @@ import * as viewHelpers from './view_helpers';
 import config from './config/config';
 
 import {BaseModel} from './models/base';
-import {User} from './models/user';
 import {Signatory} from './models/signatory';
 
 (async () => {
@@ -19,6 +18,6 @@ import {Signatory} from './models/signatory';
     const re = repl.start('openletter> ');
     const context = {};
     Object.assign(context, queryHelpers, renderHelpers, viewHelpers, config);
-    Object.assign(context, {BaseModel, User, Signatory});
+    Object.assign(context, {BaseModel, Signatory});
     Object.assign(re.context, context);
 })();
