@@ -49,6 +49,7 @@ hr {
     .fa-sun {
         display: block;
     }
+
     .fa-moon {
         display: none;
     }
@@ -83,6 +84,7 @@ section.signatories {
     h5 {
         color: #aaa;
     }
+
     .expand {
         box-shadow: inset 0px 7px 5px -3px rgba(255, 255, 255, 0.1);
 
@@ -93,10 +95,18 @@ section.signatories {
     }
 }
 
-.signatory-panel > p:hover {
+.signatory-panel>p:hover {
     background: #444;
 }
 
 .footer {
     color: white;
+}
+
+.btn {
+    color: white;
+
+    &:hover {
+        color: lightgrey;
+    }
 }

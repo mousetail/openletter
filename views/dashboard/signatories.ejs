@@ -1,5 +1,14 @@
 <section class="signatories" id="signatures">
-    <h5>Signed,</h5>
+    <h5>Signed,
+        <div class="sort-controls hidden">
+            <button id="sort-name" class="btn">
+                Name <i class="fa-arrow-down fas"></i>
+            </button>
+            <button id="sort-date" class="btn">
+                Date <i class="fa-arrow-down fas"></i>
+            </button>
+        </div>
+    </h5>
 
     <div class="signatory-panel">
         <% signatories.forEach(sig=> { %>
