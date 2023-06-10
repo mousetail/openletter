@@ -5,7 +5,7 @@ body {
     --header-height: 58px;
     padding-top: var(--header-height);
     background: #eee;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
     font-size: 11pt;
 }
 
@@ -72,6 +72,7 @@ label {
         display: none;
         font-size: 11pt;
     }
+
     .fa-moon {
         display: block;
         font-size: 9pt;
@@ -87,12 +88,12 @@ aside {
     color: #737063;
     background: #fff8dc;
 
-    & > i:first-child {
+    &>i:first-child {
         margin-right: 1.2rem;
         font-size: 1.2rem;
     }
 
-    & > :last-child,
+    &> :last-child,
     p:last-child {
         margin-bottom: 0;
     }
@@ -110,7 +111,7 @@ aside {
         text-align: center;
         line-height: 1.4;
 
-        & > i:first-child {
+        &>i:first-child {
             margin-right: 0;
             margin-bottom: 0.8rem;
         }
@@ -288,7 +289,7 @@ section.signatories {
         grid-template-columns: repeat(5, 1fr);
     }
 
-    & > p {
+    &>p {
         display: block;
         transition: all 0.2s ease;
         padding: 0.5em;
@@ -357,7 +358,7 @@ section.faq {
             overflow-y: hidden;
             border-bottom: none;
 
-            & > p {
+            &>p {
                 page-break-inside: avoid;
             }
         }
@@ -371,7 +372,7 @@ section.faq {
         }
     }
 
-    .content-container > aside {
+    .content-container>aside {
         display: none;
     }
 }
