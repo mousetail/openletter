@@ -25,4 +25,11 @@
         <a class="js-expand-signatories" href="#signatures">Expand all <%= signatories.length %> <i
                     class="fa-arrow-down fas"></i></a>
     </div>
+
+    <p class="signatory-breakdown">
+        <strong>Total signed:</strong>
+        <%= breakdown.current_mods %> <%= pluralize("moderator", breakdown.current_mods) %>,
+        <%= breakdown.former_mods %> <%= pluralize("former moderator", breakdown.former_mods) %> & staff,
+        and <%= breakdown.regular_users %> <%= pluralize("regular user", breakdown.regular_users) %>.
+    </p>
 </section>
