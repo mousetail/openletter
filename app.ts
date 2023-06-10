@@ -1,13 +1,12 @@
 import path from 'path';
 import cookieParser from 'cookie-parser';
-const bodyParser = require('body-parser');
 import sassMiddleware from 'node-sass-middleware';
 import layouts from 'ejs-layouts';
 import mysql from 'mysql2';
 import createDebug from 'debug';
 require('colors'); // eslint-disable-line import/no-unassigned-import
 
-import express from 'express';
+import express, { json, urlencoded } from 'express';
 
 import { ResponseWithLayout } from './definitions';
 import {render} from './render_helpers';
@@ -30,8 +29,8 @@ app.set('view engine', 'ejs');
 app.use(layouts.express);
 
 // Libraries setup: body parser (for POST request bodies), cookie parser, SCSS compilation, static files.
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(json());
+app.use(urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(sassMiddleware({
     src: path.join(__dirname, 'public'),

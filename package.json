@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "aes-js": "^3.1.0",
-    "body-parser": "~1.18.2",
     "colors": "^1.1.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -49,7 +48,6 @@
     "uglify-js": "^3.17.4"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.2",
     "@types/cookie-parser": "^1.4.3",
     "@types/debug": "^4.1.8",
     "@types/ejs": "^3.1.2",
