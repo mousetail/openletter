@@ -22,6 +22,7 @@
   },
   "scripts": {
     "exec": "exec",
+    "cmd": "cmd",
     "typecheck": "tsc --noEmit",
     "test": "xo",
     "lint": "xo --fix",

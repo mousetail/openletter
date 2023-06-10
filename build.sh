@@ -1,4 +1,5 @@
 echo "> tsc -t es5 --lib es7 --outDir build --esModuleInterop ./*.ts" &&
+node-sass public/stylesheets --output build/public/stylesheets &&
 tsc -t es5 --lib es7 --outDir build --esModuleInterop ./*.ts &&
 echo "> mkdir -p build/public/javascripts" &&
 mkdir -p build/public/javascripts &&
