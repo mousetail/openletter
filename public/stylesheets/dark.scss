@@ -81,11 +81,13 @@ header {
 }
 
 section.signatories {
-    h5 {
-        color: #aaa;
+    .signatories-header {
+        h5 {
+            color: #aaa;
+        }
     }
 
-    .expand {
+    .expand-wrapper {
         box-shadow: inset 0px 7px 5px -3px rgba(255, 255, 255, 0.1);
 
         a {
@@ -95,7 +97,7 @@ section.signatories {
     }
 }
 
-.signatory-panel>p:hover {
+.signatory-panel > p:hover {
     background: #444;
 }
 

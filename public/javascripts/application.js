@@ -41,20 +41,20 @@
 
   // Panel component
   const panel = {
+    sectionElem: document.querySelector('.signatories'),
     panelElem: document.querySelector('.signatory-panel'),
     toggleElem: document.querySelector('.js-expand-signatories'),
     sortBy: null,
     sortOrder: 1,
 
     togglePanel() {
-      const { panelElem, toggleElem } = this;
+      const { sectionElem, toggleElem } = this;
 
-      // Get state of panel from the existence of "expanded" class
-      const isExpanded = panelElem.classList.contains('expanded');
+      // Get state of panel from the existence of "expanded" class on the section
+      const isExpanded = sectionElem.classList.contains('expanded');
 
-      // Toggle the panel "expanded" class
-      panelElem.classList.toggle('expanded', !isExpanded);
-      document.querySelector('.sort-controls').classList.toggle('hidden', isExpanded);
+      // Toggle the "expanded" class on the section
+      sectionElem.classList.toggle('expanded', !isExpanded);
 
       // Toggle the link text
       toggleElem.innerHTML = isExpanded ? toggleElem.dataset.originalHtml : 'Collapse <i class="fa-arrow-up fas"></i>';
@@ -98,17 +98,16 @@
     },
 
     init() {
-      const { panelElem, toggleElem } = this;
+      const { sectionElem, panelElem, toggleElem } = this;
 
       // Both panel or toggle element must exist
-      if (!panelElem || !toggleElem) return;
+      if (!sectionElem || !panelElem || !toggleElem) return;
 
       // Store original text and signatory count
       toggleElem.dataset.originalHtml = toggleElem.innerHTML;
 
       // Not necessary at the moment, but could be useful in the future
-      toggleElem.dataset.count = panelElem.children.length;
-      panelElem.dataset.count = panelElem.children.length;
+      sectionElem.dataset.count = panelElem.children.length;
 
       // Add event listener to link
       toggleElem.addEventListener('click', () => {
@@ -120,15 +119,14 @@
     }
   };
 
-
-  // On document ready
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // Initialize panel
+  // Callback when document is ready
+  const appInit = () => {
     panel.init();
+    document.querySelector('.color-mode-toggle').addEventListener('click', () => {
+      switcher.toggleDarkMode();
+    });
+  };
 
-    // Add event listener to header for dark mode toggle
-    document.querySelector('.color-mode-toggle').addEventListener('click', switcher.toggleDarkMode);
-  });
-
+  // On document ready, or immediately if already loaded
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', () => appInit()) : appInit();
 })();
