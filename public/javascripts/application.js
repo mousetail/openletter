@@ -41,9 +41,6 @@
 
   // Panel component
   const panel = {
-    sectionElem: document.querySelector('.signatories'),
-    panelElem: document.querySelector('.signatory-panel'),
-    toggleElem: document.querySelector('.js-expand-signatories'),
     sortBy: null,
     sortOrder: 1,
 
@@ -98,10 +95,17 @@
     },
 
     init() {
-      const { sectionElem, panelElem, toggleElem } = this;
+      // These elements weren't available when the object was created, so we need to set them here
+      this.sectionElem = document.querySelector('.signatories');
+      this.panelElem = document.querySelector('.signatory-panel');
+      this.toggleElem = document.querySelector('.js-expand-signatories');
 
-      // Both panel or toggle element must exist
-      if (!sectionElem || !panelElem || !toggleElem) return;
+      // The elements should exist
+      const { sectionElem, panelElem, toggleElem } = this;
+      if (!sectionElem || !panelElem || !toggleElem) {
+        console.error('Missing required elements for panel.init()');
+        return;
+      }
 
       // Store original text and signatory count
       toggleElem.dataset.originalHtml = toggleElem.innerHTML;
@@ -121,7 +125,10 @@
 
   // Callback when document is ready
   const appInit = () => {
-    panel.init();
+
+    // Call panel such that "this" is bound to the panel object
+
+
     document.querySelector('.color-mode-toggle').addEventListener('click', () => {
       switcher.toggleDarkMode();
     });
