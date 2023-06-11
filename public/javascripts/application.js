@@ -125,11 +125,7 @@
     panel.init();
 
     // Add event listener to header for dark mode toggle
-    document.querySelector('header').addEventListener('click', evt => {
-      if (evt.target.classList.contains('color-mode-toggle')) {
-        switcher.toggleDarkMode();
-      }
-    });
+    document.querySelector('.color-mode-toggle').addEventListener('click', switcher.toggleDarkMode);
   });
 
 })();

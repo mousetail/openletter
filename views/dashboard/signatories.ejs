@@ -12,26 +12,25 @@
 
     <div class="signatory-panel">
         <% signatories.forEach(sig=> { %>
-            <p>
-                <a href="https://stackexchange.com/users/<%= sig.se_acct_id %>?tab=accounts" rel="noopener noreferrer"
-                    target="_blank">
-                    <%= sig.display_name %>
-                        <% if (sig.is_moderator) { %>
-                            <span title="moderator or employee">⬧</span>
-                            <% } %>
-                                <% if (sig.is_former_moderator) { %>
-                                    <span title="former moderator or former employee">⬨</span>
-                                    <% } %>
-                </a><br />
-                <small class="text-muted" data-modified-at="<%= sig.created_at %>"
-                    data-original-created-at="<%= sig.original_created_at %>">
-                    <%= strftime(new Date(Date.parse(sig.created_at)), '%b %e' ) %>
-                </small>
-            </p>
-            <% }); %>
+        <p>
+            <a href="https://stackexchange.com/users/<%= sig.se_acct_id %>?tab=accounts" rel="noopener noreferrer"
+                target="_blank">
+                <%= sig.display_name %>
+                <% if (sig.is_moderator) { %>
+                    <span title="moderator or employee">⬧</span>
+                <% } %>
+                <% if (sig.is_former_moderator) { %>
+                    <span title="former moderator or former employee">⬨</span>
+                <% } %>
+            </a><br />
+            <small class="text-muted" data-modified-at="<%= sig.created_at %>"
+                data-original-created-at="<%= sig.original_created_at %>">
+                <%= strftime(new Date(Date.parse(sig.created_at)), '%b %e' ) %>
+            </small>
+        </p>
+        <% }); %>
     </div>
     <div class="expand">
-        <a class="js-expand-signatories" href="#signatures">Expand all <%= signatories.length %> <i
-                    class="fa-arrow-down fas"></i></a>
+        <a class="js-expand-signatories" href="#signatures">Expand all <%= signatories.length %> <i class="fa-arrow-down fas"></i></a>
     </div>
 </section>
