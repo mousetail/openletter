@@ -2,12 +2,12 @@
 // Otherwise people will still have the old version cached
 
 @font-face {
-    font-family: 'Free Mono';
+    font-family: "Free Mono";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/stylesheets/FreeMono-subset.woff) format('woff');
-    unicode-range: U+2b27-2b29
+    src: url("/stylesheets/FreeMono-subset.woff") format("woff");
+    unicode-range: U+2b27-2b29;
 }
 
 body {
@@ -97,12 +97,12 @@ aside {
     color: #737063;
     background: #fff8dc;
 
-    &>i:first-child {
+    & > i:first-child {
         margin-right: 1.2rem;
         font-size: 1.2rem;
     }
 
-    &> :last-child,
+    & > :last-child,
     p:last-child {
         margin-bottom: 0;
     }
@@ -120,7 +120,7 @@ aside {
         text-align: center;
         line-height: 1.4;
 
-        &>i:first-child {
+        & > i:first-child {
             margin-right: 0;
             margin-bottom: 0.8rem;
         }
@@ -249,11 +249,31 @@ section.letter {
 }
 
 section.signatories {
-    h5 {
-        font-family: "Open Sans";
-        font-style: italic;
-        color: #555;
-        margin: 0.5em 0 1em 0;
+    .signatories-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h5 {
+            font-family: "Open Sans";
+            font-style: italic;
+            color: #555;
+            margin: 0 0.5em 0 0;
+        }
+
+        .sort-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .btn {
+                margin-right: 0.5rem;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
     }
 
     .expand {
@@ -302,7 +322,7 @@ section.signatories {
         grid-template-columns: repeat(5, 1fr);
     }
 
-    &>p {
+    & > p {
         display: block;
         transition: all 0.2s ease;
         padding: 0.5em;
@@ -383,7 +403,7 @@ footer {
             overflow-y: hidden;
             border-bottom: none;
 
-            &>p {
+            & > p {
                 page-break-inside: avoid;
             }
         }
@@ -397,15 +417,11 @@ footer {
         }
     }
 
-    .content-container>aside {
+    .content-container > aside {
         display: none;
     }
 }
 
 .hidden {
     visibility: hidden;
-}
-
-.sort-controls {
-    float: right;
 }
