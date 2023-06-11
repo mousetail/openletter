@@ -27,5 +27,4 @@ jobs:
             nvm use
             npm install
             npm run build
-            npx node-sass public/stylesheets --output build/public/stylesheets
             sudo /bin/systemctl restart openletter.service

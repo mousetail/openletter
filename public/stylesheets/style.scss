@@ -1,11 +1,20 @@
 // Important: When editing this file change the version number in views/layouts/application.ejs
 // Otherwise people will still have the old version cached
 
+@font-face {
+    font-family: 'Free Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/stylesheets/FreeMono-subset.woff) format('woff');
+    unicode-range: U+2b27-2b29
+}
+
 body {
     --header-height: 58px;
     padding-top: var(--header-height);
     background: #eee;
-    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+    font-family: "Free Mono", "Open Sans", sans-serif;
     font-size: 11pt;
 }
 
@@ -334,7 +343,8 @@ footer {
     text-align: center;
     width: 100%;
 
-    & p, ul {
+    & p,
+    ul {
         margin: 0;
     }
 
