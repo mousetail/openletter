@@ -5,9 +5,9 @@
     font-family: "Free Mono";
     font-style: normal;
     font-weight: 400;
-    font-display: swap;
     src: url("/stylesheets/FreeMono-subset.woff") format("woff");
     unicode-range: U+2b27-2b29;
+    size-adjust: 140%;
 }
 
 body {
@@ -97,12 +97,12 @@ aside {
     color: #737063;
     background: #fff8dc;
 
-    & > i:first-child {
+    &>i:first-child {
         margin-right: 1.2rem;
         font-size: 1.2rem;
     }
 
-    & > :last-child,
+    &> :last-child,
     p:last-child {
         margin-bottom: 0;
     }
@@ -120,7 +120,7 @@ aside {
         text-align: center;
         line-height: 1.4;
 
-        & > i:first-child {
+        &>i:first-child {
             margin-right: 0;
             margin-bottom: 0.8rem;
         }
@@ -333,7 +333,7 @@ section.signatories {
         grid-template-columns: repeat(5, 1fr);
     }
 
-    & > p {
+    &>p {
         display: block;
         transition: all 0.2s ease;
         padding: 0.5em;
@@ -414,7 +414,7 @@ footer {
             overflow-y: hidden;
             border-bottom: none;
 
-            & > p {
+            &>p {
                 page-break-inside: avoid;
             }
         }
@@ -428,7 +428,7 @@ footer {
         }
     }
 
-    .content-container > aside {
+    .content-container>aside {
         display: none;
     }
 }
