@@ -35,7 +35,7 @@
     }
   };
   // Init immediately before page load to avoid light mode FOUC
-  // This script should be placed in the document head, after the dark mode stylesheet
+  // This script should be placed in the document head, after the dark mode stylesheet, and without the jQuery ready function
   switcher.init();
 
 
