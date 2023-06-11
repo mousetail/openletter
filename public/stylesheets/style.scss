@@ -6,7 +6,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/stylesheets/FreeMono-subset.woff) format('woff');
+    src: url(/stylesheets/FreeMono.woff) format('woff');
     unicode-range: U+2b27-2b29
 }
 
@@ -14,7 +14,7 @@ body {
     --header-height: 58px;
     padding-top: var(--header-height);
     background: #eee;
-    font-family: "Free Mono", "Open Sans", sans-serif;
+    font-family: "Open Sans", "Segoe UI Symbol", sans-serif, "Free Mono";
     font-size: 11pt;
 }
 
