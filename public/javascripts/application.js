@@ -1,4 +1,44 @@
-$(() => {
+(() => {
+
+  // Switcher component
+  const switcher = {
+    darkModeKey: 'darkMode',
+    darkMode: window.matchMedia('(prefers-color-scheme:dark)').matches,
+
+    init() {
+      // Fetch dark mode preference from local storage
+      try {
+        const stored = window.localStorage.getItem(this.darkModeKey);
+
+        if (stored !== null) {
+          const darkMode = stored === 'true';
+          this.switchMode(darkMode);
+        }
+      } catch (e) { } // ignore ls errors
+    },
+
+    switchMode(darkMode) {
+      const link = document.querySelector('link[href*="dark.css"]');
+      if (!link) return; // no dark mode stylesheet, can't toggle
+
+      link.disabled = !darkMode;
+      this.darkMode = darkMode;
+
+      // Save dark mode preference to local storage
+      try {
+        window.localStorage.setItem(this.darkModeKey, this.darkMode);
+      } catch (e) { } // ignore ls errors
+    },
+
+    toggleDarkMode() {
+      this.switchMode(!this.darkMode);
+    }
+  };
+  // Init immediately before page load to avoid light mode FOUC
+  // This script should be placed in the document head, after the dark mode stylesheet, and without the jQuery ready function
+  switcher.init();
+
+
   // Panel component
   const panel = {
     panelElem: document.querySelector('.signatory-panel'),
@@ -7,7 +47,7 @@ $(() => {
     sortOrder: 1,
 
     togglePanel() {
-      const {panelElem, toggleElem} = this;
+      const { panelElem, toggleElem } = this;
 
       // Get state of panel from the existence of "expanded" class
       const isExpanded = panelElem.classList.contains('expanded');
@@ -39,6 +79,12 @@ $(() => {
           this.sort = by;
         }
 
+        // Clear selected class from sort buttons
+        document.querySelectorAll('.sort-controls .btn').forEach(i => i.classList.remove('btn-info'));
+
+        // Add selected class to clicked button
+        target.classList.add('btn-info');
+
         const icon = target.querySelector('i.fas');
         icon.classList.toggle('fa-arrow-down', this.sortOrder === 1);
         icon.classList.toggle('fa-arrow-up', this.sortOrder === -1);
@@ -52,13 +98,10 @@ $(() => {
     },
 
     init() {
-      const {panelElem, toggleElem} = this;
+      const { panelElem, toggleElem } = this;
 
       // Both panel or toggle element must exist
-      if (!panelElem || !toggleElem) {
-        console.error('Missing panel or toggle element');
-        return;
-      }
+      if (!panelElem || !toggleElem) return;
 
       // Store original text and signatory count
       toggleElem.dataset.originalHtml = toggleElem.innerHTML;
@@ -76,6 +119,16 @@ $(() => {
       document.querySelector('#sort-date').addEventListener('click', this.sort('date'));
     }
   };
-  panel.init();
-});
 
+
+  // On document ready
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Initialize panel
+    panel.init();
+
+    // Add event listener to header for dark mode toggle
+    document.querySelector('.color-mode-toggle').addEventListener('click', switcher.toggleDarkMode);
+  });
+
+})();
