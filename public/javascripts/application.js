@@ -41,10 +41,9 @@
 
   // Panel component
   const panel = {
-    sectionElem: document.querySelector('.signatories, #signatures'),
+    sectionElem: document.querySelector('.signatories'),
     panelElem: document.querySelector('.signatory-panel'),
     toggleElem: document.querySelector('.js-expand-signatories'),
-    controlsElem: document.querySelector('.sort-controls'),
     sortBy: null,
     sortOrder: 1,
 
@@ -99,17 +98,16 @@
     },
 
     init() {
-      const { panelElem, toggleElem } = this;
+      const { sectionElem, panelElem, toggleElem } = this;
 
       // Both panel or toggle element must exist
-      if (!panelElem || !toggleElem) return;
+      if (!sectionElem || !panelElem || !toggleElem) return;
 
       // Store original text and signatory count
       toggleElem.dataset.originalHtml = toggleElem.innerHTML;
 
       // Not necessary at the moment, but could be useful in the future
-      toggleElem.dataset.count = panelElem.children.length;
-      panelElem.dataset.count = panelElem.children.length;
+      sectionElem.dataset.count = panelElem.children.length;
 
       // Add event listener to link
       toggleElem.addEventListener('click', () => {
@@ -130,5 +128,5 @@
   };
 
   // On document ready, or immediately if already loaded
-  document.readyState !== 'loading' ? appInit() : document.addEventListener('DOMContentLoaded', () => appInit());
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', () => appInit()) : appInit();
 })();
