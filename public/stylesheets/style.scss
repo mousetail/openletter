@@ -253,6 +253,7 @@ section.signatories {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 0.5rem 0 1rem 0;
 
         h5 {
             font-family: "Open Sans";
@@ -265,6 +266,8 @@ section.signatories {
             display: flex;
             justify-content: center;
             align-items: center;
+            visibility: hidden;
+            pointer-events: none;
 
             .btn {
                 margin-right: 0.5rem;
@@ -276,7 +279,7 @@ section.signatories {
         }
     }
 
-    .expand {
+    .expand-wrapper {
         text-align: center;
         font-weight: bold;
         box-shadow: inset 0px 7px 5px -3px rgba(0, 0, 0, 0.1);
@@ -292,6 +295,19 @@ section.signatories {
             background: white;
         }
     }
+
+    &.expanded {
+        .signatories-header {
+            .sort-controls {
+                visibility: visible;
+                pointer-events: all;
+            }
+        }
+        .signatory-panel {
+            max-height: unset;
+            overflow-y: hidden;
+        }
+    }
 }
 
 .signatory-breakdown {
@@ -304,11 +320,6 @@ section.signatories {
     max-height: 25em;
     overflow-y: scroll;
     border-bottom: 1px solid #ddd;
-
-    &.expanded {
-        max-height: unset;
-        overflow-y: hidden;
-    }
 
     @media screen and (min-width: 600px) {
         grid-template-columns: repeat(3, 1fr);

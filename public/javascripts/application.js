@@ -41,20 +41,21 @@
 
   // Panel component
   const panel = {
+    sectionElem: document.querySelector('.signatories, #signatures'),
     panelElem: document.querySelector('.signatory-panel'),
     toggleElem: document.querySelector('.js-expand-signatories'),
+    controlsElem: document.querySelector('.sort-controls'),
     sortBy: null,
     sortOrder: 1,
 
     togglePanel() {
-      const { panelElem, toggleElem } = this;
+      const { sectionElem, toggleElem } = this;
 
-      // Get state of panel from the existence of "expanded" class
-      const isExpanded = panelElem.classList.contains('expanded');
+      // Get state of panel from the existence of "expanded" class on the section
+      const isExpanded = sectionElem.classList.contains('expanded');
 
-      // Toggle the panel "expanded" class
-      panelElem.classList.toggle('expanded', !isExpanded);
-      document.querySelector('.sort-controls').classList.toggle('hidden', isExpanded);
+      // Toggle the "expanded" class on the section
+      sectionElem.classList.toggle('expanded', !isExpanded);
 
       // Toggle the link text
       toggleElem.innerHTML = isExpanded ? toggleElem.dataset.originalHtml : 'Collapse <i class="fa-arrow-up fas"></i>';
