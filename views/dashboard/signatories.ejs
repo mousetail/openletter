@@ -17,14 +17,10 @@
                     target="_blank">
                     <%= sig.display_name %>
                         <% if (sig.is_moderator) { %>
-                            <span title="moderator or employee">
-                                <i class="fa-solid fa-diamond"></i>
-                            </span>
+                            <span title="moderator or employee">⬧</span>
                             <% } %>
                                 <% if (sig.is_former_moderator) { %>
-                                    <span title="former moderator or former employee">
-                                        <i class="fa-solid fa-diamond-half"></i>
-                                    </span>
+                                    <span title="former moderator or former employee">⬨</span>
                                     <% } %>
                 </a><br />
                 <small class="text-muted" data-modified-at="<%= sig.created_at %>"
