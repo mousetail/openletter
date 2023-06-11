@@ -120,15 +120,14 @@
     }
   };
 
-
-  // On document ready
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // Initialize panel
+  // Callback when document is ready
+  const appInit = () => {
     panel.init();
+    document.querySelector('.color-mode-toggle').addEventListener('click', () => {
+      switcher.toggleDarkMode();
+    });
+  };
 
-    // Add event listener to header for dark mode toggle
-    document.querySelector('.color-mode-toggle').addEventListener('click', switcher.toggleDarkMode);
-  });
-
+  // On document ready, or immediately if already loaded
+  document.readyState === 'complete' ? appInit() : document.addEventListener('DOMContentLoaded', () => appInit());
 })();
