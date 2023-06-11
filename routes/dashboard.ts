@@ -8,6 +8,7 @@ import type { AuthRedirectRequestQs, ResponseWithLayout, SignRequestBody } from 
 import crypto from 'crypto';
 import type { Debugger } from 'debug'
 import { getAuthURL } from '../helpers/auth';
+import { getSignatoryBreakdown } from '../helpers/signatories';
 const fetch = require('node-fetch');
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -24,9 +25,13 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
                 original_created_at: signatory.created_at
             }
         });
+
         const etag = crypto.createHash('sha256').update(`${config.getSiteSetting('letterVersion')}-${signatories.length}`).digest('hex');
         res.setHeader('ETag', etag);
-        render(req, res, 'dashboard/dash', { signatories }, { pool });
+
+        const breakdown = getSignatoryBreakdown(signatories);
+
+        render(req, res, 'dashboard/dash', { breakdown, signatories }, { pool });
     });
 
 
