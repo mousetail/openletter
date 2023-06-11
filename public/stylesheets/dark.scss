@@ -81,8 +81,10 @@ header {
 }
 
 section.signatories {
-    h5 {
-        color: #aaa;
+    .signatories-header {
+        h5 {
+            color: #aaa;
+        }
     }
 
     .expand {
@@ -95,7 +97,7 @@ section.signatories {
     }
 }
 
-.signatory-panel>p:hover {
+.signatory-panel > p:hover {
     background: #444;
 }
 
