@@ -1,54 +1,4 @@
 $(() => {
-
-  // Switcher component
-  const switcher = {
-    darkModeKey: 'darkMode',
-    darkMode: window.matchMedia('(prefers-color-scheme:dark)').matches,
-
-    init() {
-      // Fetch dark mode preference from local storage
-      try {
-        const stored = window.localStorage.getItem(this.darkModeKey);
-
-        if (stored !== null) {
-          const darkMode = stored === 'true';
-          this.switchMode(darkMode);
-        }
-      } catch (e) {
-        // ignore
-      }
-
-      // Add event listener to toggle dark mode
-      document.addEventListener('click', evt => {
-        if (evt.target?.classList.contains('color-mode-toggle')) {
-          this.toggleDarkMode();
-        }
-      });
-    },
-
-    switchMode(darkMode) {
-      const link = document.querySelector('link[href*="dark.css"]');
-
-      if (link) {
-        link.disabled = !darkMode;
-      }
-
-      this.darkMode = darkMode;
-
-      // Save dark mode preference to local storage
-      try {
-        window.localStorage.setItem(this.darkModeKey, this.darkMode);
-      } catch (e) {
-        // ignore
-      }
-    },
-
-    toggleDarkMode() {
-      this.switchMode(!this.darkMode);
-    }
-  };
-  switcher.init();
-
   // Panel component
   const panel = {
     panelElem: document.querySelector('.signatory-panel'),
@@ -57,7 +7,7 @@ $(() => {
     sortOrder: 1,
 
     togglePanel() {
-      const { panelElem, toggleElem } = this;
+      const {panelElem, toggleElem} = this;
 
       // Get state of panel from the existence of "expanded" class
       const isExpanded = panelElem.classList.contains('expanded');
@@ -76,11 +26,11 @@ $(() => {
           return new Date(elem.querySelector('small').dataset.originalCreatedAt).toISOString();
         },
         name(elem) {
-          return elem.querySelector('a').textContent.trim()
+          return elem.querySelector('a').textContent.trim();
         }
       }[by];
 
-      return (ev) => {
+      return ev => {
         const target = ev.currentTarget;
 
         if (this.sort === by) {
@@ -97,12 +47,12 @@ $(() => {
           i => [i, sortFunction(i)]
         );
         taggedChildren.sort((a, b) => this.sortOrder * a[1].localeCompare(b[1]));
-        this.panelElem.replaceChildren(...taggedChildren.map(i => i[0]))
-      }
+        this.panelElem.replaceChildren(...taggedChildren.map(i => i[0]));
+      };
     },
 
     init() {
-      const { panelElem, toggleElem, sort } = this;
+      const {panelElem, toggleElem} = this;
 
       // Both panel or toggle element must exist
       if (!panelElem || !toggleElem) {
@@ -118,7 +68,7 @@ $(() => {
       panelElem.dataset.count = panelElem.children.length;
 
       // Add event listener to link
-      toggleElem.addEventListener('click', evt => {
+      toggleElem.addEventListener('click', () => {
         this.togglePanel();
       });
 
@@ -128,5 +78,4 @@ $(() => {
   };
   panel.init();
 });
-
 
