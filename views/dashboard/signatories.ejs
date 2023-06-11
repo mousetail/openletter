@@ -1,14 +1,15 @@
 <section class="signatories" id="signatures">
-    <h5>Signed,
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Signed,</h5>
         <div class="sort-controls hidden">
-            <button id="sort-name" class="btn">
+            <button id="sort-name" class="btn btn-sm">
                 Name <i class="fa-arrow-down fas"></i>
             </button>
-            <button id="sort-date" class="btn">
+            <button id="sort-date" class="btn btn-sm">
                 Date <i class="fa-arrow-down fas"></i>
             </button>
         </div>
-    </h5>
+    </div>
 
     <div class="signatory-panel">
         <% signatories.forEach(sig=> { %>

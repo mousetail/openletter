@@ -79,6 +79,12 @@
           this.sort = by;
         }
 
+        // Clear selected class from sort buttons
+        document.querySelectorAll('.sort-controls .btn').forEach(i => i.classList.remove('btn-info'));
+
+        // Add selected class to clicked button
+        target.classList.add('btn-info');
+
         const icon = target.querySelector('i.fas');
         icon.classList.toggle('fa-arrow-down', this.sortOrder === 1);
         icon.classList.toggle('fa-arrow-up', this.sortOrder === -1);
