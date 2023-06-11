@@ -101,10 +101,7 @@
       const { panelElem, toggleElem } = this;
 
       // Both panel or toggle element must exist
-      if (!panelElem || !toggleElem) {
-        console.error('Missing panel or toggle element');
-        return;
-      }
+      if (!panelElem || !toggleElem) return;
 
       // Store original text and signatory count
       toggleElem.dataset.originalHtml = toggleElem.innerHTML;
