@@ -19,8 +19,8 @@
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Montserrat:500|Open+Sans:400,400i,600|Fira+Sans&display=swap" />
-    <link rel="stylesheet" href="/stylesheets/style.css?5" />
-    <link rel="stylesheet" href="/stylesheets/dark.css?5" media="(prefers-color-scheme:dark)" />
+    <link rel="stylesheet" href="/stylesheets/style.css?7" />
+    <link rel="stylesheet" href="/stylesheets/dark.css?7" media="(prefers-color-scheme:dark)" />
 
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -30,7 +30,8 @@
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script type="application/javascript" src="/javascripts/application.js?1"></script>
+    <script type="application/javascript" src="/javascripts/application.js?2"></script>
+    <script type="application/javascript" src="/javascripts/dark.js?1"></script>
 
     <link rel="icon" href="icon.png" />
 </head>
@@ -74,13 +75,6 @@
         </main>
     </div>
 
-    <div class="footer text-muted">
-        This page was originally designed by <a href="https://github.com/ArtOfCode-">ArtOfCode</a>. For issues on
-        this site, please consider contributing at
-        <a href="https://github.com/mousetail/openletter">mousetail/openletter</a>. Join us in the
-        <a href="https://discord.gg/abJWUdTF">Unofficial Stack&nbsp;Exchange Meta&nbsp;Discussion Discord server</a>
-        if you want to help or communicate with the organisers &amp; participants.
-    </div>
+    <%- include('../common/footer') %>
 </body>
-
 </html>
