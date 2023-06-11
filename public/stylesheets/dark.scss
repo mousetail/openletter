@@ -87,12 +87,19 @@ section.signatories {
         }
     }
 
-    .expand-wrapper {
-        box-shadow: inset 0px 7px 5px -3px rgba(255, 255, 255, 0.1);
+    .signatory-component {
+        .panel-bottom {
+            box-shadow: inset 0px 7px 5px -3px rgba(255, 255, 255, 0.1);
+            background-color: #333; /* same as main */
 
-        a {
-            border-top: 1px solid #333;
-            background-color: #333;
+            &::before {
+                border-top-color: #ddd;
+            }
+
+            a {
+                border-top: 1px solid #333;
+                background-color: #333; /* same as main */
+            }
         }
     }
 }

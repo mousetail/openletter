@@ -97,12 +97,12 @@ aside {
     color: #737063;
     background: #fff8dc;
 
-    &>i:first-child {
+    & > i:first-child {
         margin-right: 1.2rem;
         font-size: 1.2rem;
     }
 
-    &> :last-child,
+    & > :last-child,
     p:last-child {
         margin-bottom: 0;
     }
@@ -120,7 +120,7 @@ aside {
         text-align: center;
         line-height: 1.4;
 
-        &>i:first-child {
+        & > i:first-child {
             margin-right: 0;
             margin-bottom: 0.8rem;
         }
@@ -279,20 +279,37 @@ section.signatories {
         }
     }
 
-    .expand-wrapper {
-        text-align: center;
-        font-weight: bold;
-        box-shadow: inset 0px 7px 5px -3px rgba(0, 0, 0, 0.1);
+    .signatory-component {
+        position: relative;
 
-        a {
-            display: inline-block;
-            border: 1px solid #ddd;
-            border-top: 1px solid white;
-            border-bottom-left-radius: 4px;
-            border-bottom-right-radius: 4px;
-            margin: -1px auto 0 auto;
-            padding: 0.5rem 2rem;
-            background: white;
+        .panel-bottom {
+            position: relative;
+            background: white; /* same as main */
+            text-align: center;
+            font-weight: bold;
+            box-shadow: inset 0px 7px 5px -3px rgba(0, 0, 0, 0.1);
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -1px;
+                left: 0;
+                right: 0;
+                height: 1px;
+                z-index: -1;
+                border-top: 1px solid #ddd;
+            }
+
+            a {
+                display: inline-block;
+                border: 1px solid #ddd;
+                border-top: 1px solid white;
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+                margin: -1px auto 0 auto;
+                padding: 0.5rem 2rem;
+                background: white; /* same as main */
+            }
         }
     }
 
@@ -303,9 +320,17 @@ section.signatories {
                 pointer-events: all;
             }
         }
-        .signatory-panel {
-            max-height: unset;
-            overflow-y: hidden;
+        .signatory-component {
+            .signatory-panel {
+                max-height: unset;
+                overflow-y: hidden;
+            }
+            .panel-bottom {
+                position: sticky;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
         }
     }
 }
@@ -333,7 +358,7 @@ section.signatories {
         grid-template-columns: repeat(5, 1fr);
     }
 
-    &>p {
+    & > p {
         display: block;
         transition: all 0.2s ease;
         padding: 0.5em;
@@ -399,6 +424,10 @@ footer {
 
     header {
         position: static;
+
+        .color-mode-toggle {
+            display: none;
+        }
     }
 
     section.signing {
@@ -408,31 +437,29 @@ footer {
     section.signatories {
         page-break-inside: avoid;
 
-        .signatory-panel {
-            grid-template-columns: repeat(4, 1fr) !important;
-            max-height: unset;
-            overflow-y: hidden;
-            border-bottom: none;
+        .signatory-component {
+            .signatory-panel {
+                grid-template-columns: repeat(4, 1fr) !important;
+                max-height: unset;
+                overflow-y: hidden;
+                border-bottom: none;
 
-            &>p {
-                page-break-inside: avoid;
+                & > p {
+                    page-break-inside: avoid;
+                }
             }
-        }
 
-        .expand {
-            display: none;
-
-            .js-expand-signatories {
+            .panel-bottom {
                 display: none;
             }
         }
     }
 
-    .content-container>aside {
+    .content-container > aside {
         display: none;
     }
-}
 
-.hidden {
-    visibility: hidden;
+    .print-hidden {
+        display: none !important;
+    }
 }
