@@ -125,9 +125,7 @@
 
   // Callback when document is ready
   const appInit = () => {
-
-    // Call panel such that "this" is bound to the panel object
-
+    panel.init();
 
     document.querySelector('.color-mode-toggle').addEventListener('click', () => {
       switcher.toggleDarkMode();
