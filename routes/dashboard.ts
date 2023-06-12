@@ -6,24 +6,24 @@ import config from '../config/config';
 import { Signatory } from '../models/signatory';
 import type { AuthRedirectRequestQs, ResponseWithLayout, SignRequestBody } from '../definitions';
 import crypto from 'crypto';
-import type { Debugger } from 'debug'
+import type { Debugger } from 'debug';
 import { getAuthURL } from '../helpers/auth';
 import { getSignatoryBreakdown } from '../helpers/signatories';
 const fetch = require('node-fetch');
 const router = express.Router(); // eslint-disable-line new-cap
 
-const minimumDate = new Date('2023-06-05T04:00:00Z')
+const minimumDate = new Date('2023-06-05T04:00:00Z');
 
 export default (pool: mt.Pool, _log: Debugger): express.Router => {
     router.get('/', async (req: express.Request, res: ResponseWithLayout) => {
         const signatories = (
-            await Signatory.where(`se_acct_id IS NOT NULL AND letter = 'main'`).order('is_moderator DESC, is_former_moderator DESC, RAND()', '', true).get()
+            await Signatory.where('se_acct_id IS NOT NULL AND letter = \'main\'').order('is_moderator DESC, is_former_moderator DESC, RAND()', '', true).get()
         ).map((signatory: Signatory) => {
             return {
                 ...signatory,
                 created_at: signatory.created_at >= minimumDate ? signatory.created_at : minimumDate,
                 original_created_at: signatory.created_at
-            }
+            };
         });
 
         const etag = crypto.createHash('sha256').update(`${config.getSiteSetting('letterVersion')}-${signatories.length}`).digest('hex');
@@ -44,8 +44,8 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
     });
 
     router.post('/sign', async (req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {
-        const displayName = req.body['display_name'] || null;
-        const letter = req.body['letter'] || 'main';
+        const displayName = req.body.display_name || null;
+        const letter = req.body.letter || 'main';
         if (displayName.indexOf('♦') !== -1) {
             error(req, res, 'You may not use the ♦ character in your display name.', pool);
             return;
@@ -59,8 +59,8 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
     });
 
     router.get('/auth-redirect', async (req: express.Request<any, any, any, AuthRedirectRequestQs>, res: ResponseWithLayout) => {
-        const code = req.query['code'];
-        const state = req.query['state'];
+        const code = req.query.code;
+        const state = req.query.state;
         const signatoryId = state.split('|')[0];
         const letter = state.split('|')[1];
 
@@ -90,19 +90,17 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
             }
 
             const accountId = items[0].account_id;
-            const isModerator = items.filter(i => i.user_type === 'moderator').length > 0;
+            const isModerator = items.filter((i) => i.user_type === 'moderator').length > 0;
 
             const signatory: Signatory = await <Promise<Signatory>>Signatory.find(Number.parseInt(signatoryId));
             const success = await signatory.update({ se_acct_id: accountId, is_moderator: isModerator });
 
             if (success) {
                 res.redirect(letter === 'main' ? '/' : `/${letter}`);
-            }
-            else {
+            } else {
                 error(req, res, 'You have already signed this letter.', pool);
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.error(err);
             error(req, res, 'Unknown server error. This problem has been logged.', pool);
         }

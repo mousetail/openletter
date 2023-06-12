@@ -47,7 +47,7 @@ app.use((req: express.Request, res: express.Response, next: Function) => {
 });
 
 // Routes
-for (let [path, routerFactory] of Object.entries(routes)) {
+for (const [path, routerFactory] of Object.entries(routes)) {
     app.use(path, routerFactory(pool, routesLogger));
 }
 
@@ -57,10 +57,9 @@ app.use((req: express.Request, res: ResponseWithLayout) => {
         render(req, res, 'common/coded_err', {name: 'Server Error',
             description: 'The server encountered an internal error while serving your request.'},
         {pool});
-    }
-    else {
+    } else {
         render(req, res, 'common/coded_err', {name: 'Not Found', description: 'The page you requested could not be found.'},
-        {pool});
+            {pool});
     }
 });
 

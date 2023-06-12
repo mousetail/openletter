@@ -33,7 +33,7 @@ export default (req: et.Request, _res: ResponseWithLayout, _pool: mt.Pool) => {
      * @param params An object containing parameters to serialize.
      */
     const serializeParams = (params: {}): string => {
-        const list = Object.keys(params).map(k => `${k}=${params[k]}`);
+        const list = Object.keys(params).map((k) => `${k}=${params[k]}`);
         return `?${list.join('&')}`;
     };
 
@@ -99,13 +99,11 @@ export default (req: et.Request, _res: ResponseWithLayout, _pool: mt.Pool) => {
                 i += 1;
                 const control = chars[i];
                 if (!!mappers[control]) {
-                formatted += mappers[control].call(dt);
+                    formatted += mappers[control].call(dt);
+                } else {
+                    formatted += `%${control}`;
                 }
-                else {
-                formatted += `%${control}`;
-                }
-            }
-            else {
+            } else {
                 formatted += chars[i];
             }
         }

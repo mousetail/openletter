@@ -6,7 +6,7 @@ const config = new Config({
     port: 13131,
     secretKey: '',
     siteSettings: [
-        
+
     ]
 });
 export default config;

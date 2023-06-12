@@ -1,4 +1,4 @@
-import type { Signatory } from "../models/signatory";
+import type { Signatory } from '../models/signatory';
 
 export interface SignatoryBreakdown {
     current_mods: number;
@@ -20,7 +20,7 @@ export const getSignatoryBreakdown = (
     };
 
     for (const signatory of signatories) {
-        if(signatory.is_moderator) {
+        if (signatory.is_moderator) {
             breakdown.current_mods += 1;
         } else if (signatory.is_former_moderator) {
             breakdown.former_mods += 1;

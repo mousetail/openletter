@@ -20,26 +20,25 @@ import {BaseModel} from './models/base';
  * @param status optional - a numeric HTTP status to return
  */
 export const render = async (req: et.Request, res: ResponseWithLayout, view: string | object | Array<any>, locals: Object = {},
-                      {layout, pool, status}: {layout?: string, pool: mt.Pool, status?: number}) => {
-  if (status) {
-    res.status(status);
-  }
+    {layout, pool, status}: {layout?: string, pool: mt.Pool, status?: number}) => {
+    if (status) {
+        res.status(status);
+    }
 
-  if (typeof (view) === 'string') {
-    const fullLayout = `layouts/${layout || 'application'}`;
-    renderLogger(`Rendering ${view} within ${fullLayout}.`);
+    if (typeof (view) === 'string') {
+        const fullLayout = `layouts/${layout || 'application'}`;
+        renderLogger(`Rendering ${view} within ${fullLayout}.`);
 
-    // Because the default layout requires a title but individual actions might not set it, make sure we have a default.
-    locals['title'] = locals['title'] || '';
+        // Because the default layout requires a title but individual actions might not set it, make sure we have a default.
+        locals.title = locals.title || '';
 
-    locals = Object.assign(locals, viewHelpers(req, res, pool));
-    res.layout(fullLayout, locals, {content: {block: view, data: locals}});
-  }
-  else {
+        locals = Object.assign(locals, viewHelpers(req, res, pool));
+        res.layout(fullLayout, locals, {content: {block: view, data: locals}});
+    } else {
     // If view isn't a string, assume it's intended to be sent as JSON.
-    res.set('Content-Type', 'application/json');
-    res.send(JSON.stringify(view));
-  }
+        res.set('Content-Type', 'application/json');
+        res.send(JSON.stringify(view));
+    }
 };
 
 /**
@@ -50,11 +49,11 @@ export const render = async (req: et.Request, res: ResponseWithLayout, view: str
  * @returns {Promise} always resolves, gets passed an object with err and str params.
  */
 export const renderInternalView = async (file, data, options = {}) => {
-  return new Promise(async resolve => {
-    ejs.renderFile(file, data, options, (err, str) => {
-      resolve({err, str});
+    return new Promise(async (resolve) => {
+        ejs.renderFile(file, data, options, (err, str) => {
+            resolve({err, str});
+        });
     });
-  });
 };
 
 /**
@@ -65,7 +64,7 @@ export const renderInternalView = async (file, data, options = {}) => {
  * @param pool optional - a database connection pool
  */
 export const error = (req: et.Request, res: ResponseWithLayout, err: any, pool: mt.Pool) => {
-  render(req, res, 'common/error', {title: 'Error', error: err}, {pool});
+    render(req, res, 'common/error', {title: 'Error', error: err}, {pool});
 };
 
 /**
@@ -77,9 +76,9 @@ export const error = (req: et.Request, res: ResponseWithLayout, err: any, pool: 
  */
 export const paginate = async (collection: typeof BaseModel, page: number, per_page: number, order: {field?: string, direction: 'ASC' | 'DESC'} = {direction: 'ASC'}):
                               Promise<{records: BaseModel[], pagination: {currentPage: number, totalPages: number}}> => {
-  page = typeof page === 'number' ? page : parseInt(page, 10);
-  per_page = typeof per_page === 'number' ? per_page : parseInt(per_page, 10);
-  const count = await collection.count();
-  const records = await collection.page(page, per_page, order).get();
-  return {records, pagination: {currentPage: page, totalPages: Math.max(1, Math.ceil(count / per_page))}};
+    page = typeof page === 'number' ? page : parseInt(page, 10);
+    per_page = typeof per_page === 'number' ? per_page : parseInt(per_page, 10);
+    const count = await collection.count();
+    const records = await collection.page(page, per_page, order).get();
+    return {records, pagination: {currentPage: page, totalPages: Math.max(1, Math.ceil(count / per_page))}};
 };
