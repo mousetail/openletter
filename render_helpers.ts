@@ -7,7 +7,6 @@ import {ResponseWithLayout} from './definitions';
 import et from 'express';
 import mt from 'mysql2';
 import viewHelpers from './view_helpers';
-import {BaseModel} from './models/base';
 
 /**
  * Render a specified view within a specified or default (application) layout.
