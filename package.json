@@ -7,8 +7,8 @@
     "exec": "exec",
     "cmd": "cmd",
     "typecheck": "tsc --noEmit",
-    "test": "xo",
-    "lint": "xo --fix",
+    "test": "eslint *.ts routes/* public/javascripts/* config/* helpers/* models/*",
+    "lint": "npm run test -- --fix",
     "dashboard": "cross-env DEBUG=app:* node build/app.js",
     "build": "sh ./build.sh || exit 1",
     "build-views": "sh ./build-views.sh || exit 1",
@@ -35,39 +35,8 @@
     "@types/node-fetch": "^2.6.4",
     "@types/node-sass-middleware": "^0.0.32",
     "cross-env": "^7.0.3",
-    "xo": "^0.18.2"
-  },
-  "xo": {
-    "space": true,
-    "envs": [
-      "browser",
-      "jquery"
-    ],
-    "rules": {
-      "quotes": [
-        "error",
-        "single",
-        {
-          "avoidEscape": true
-        }
-      ],
-      "camelcase": 1,
-      "brace-style": 0,
-      "no-prototype-builtins": 0,
-      "dot-notation": 0,
-      "linebreak-style": "off",
-      "comma-dangle": "off",
-      "no-eq-null": "off",
-      "eqeqeq": [
-        "error",
-        "smart"
-      ],
-      "unicorn/filename-case": "off",
-      "no-restricted-modules": "off",
-      "no-use-extend-native/no-use-extend-native": "off",
-      "unicorn/catch-error-name": "off",
-      "no-new": "off",
-      "no-alert": "off"
-    }
+    "eslint": "^8.42.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9"
   }
 }
