@@ -1,5 +1,4 @@
 import path from 'path';
-import cookieParser from 'cookie-parser';
 import sassMiddleware from 'node-sass-middleware';
 import layouts from 'ejs-layouts';
 import mysql from 'mysql2';
@@ -28,10 +27,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(layouts.express);
 
-// Libraries setup: body parser (for POST request bodies), cookie parser, SCSS compilation, static files.
+// Libraries setup: body parser SCSS compilation, static files.
 app.use(json());
 app.use(urlencoded({extended: false}));
-app.use(cookieParser());
 app.use(sassMiddleware({
     src: path.join(__dirname, 'public'),
     dest: path.join(__dirname, 'public'),
