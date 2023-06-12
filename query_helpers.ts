@@ -1,8 +1,8 @@
 import createDebug from 'debug';
-require('colors'); // eslint-disable-line import/no-unassigned-import
 
 import mt from 'mysql2';
 import et from 'express';
+import chalk from 'chalk';
 
 const queryLogger = createDebug('app:query');
 createDebug('app:helpers'); // eslint-disable-line import/no-unassigned-import
@@ -76,15 +76,15 @@ export const queries = (pool: mt.Pool, params: Array<any> = [], ...queries: Arra
       pool.query(q, queryParams, (err, rows, fields) => {
         if (err) {
           // LOG ALL THE THINGS. Log as much as possible to help diagnostics.
-          queryLogger(`${'▮ FAILED QUERY LOG ▮'['red']}`);
-          queryLogger(`${'▮'['red']} ${q}`);
-          queryLogger(`${'▮'['red']} ${pp(queryParams)}`);
-          queryLogger(`${'▮'['red']} ${err}`);
-          queryLogger(`${'▮ END FAILED QUERY ▮'['red']}`);
+          queryLogger(chalk.red('▮ FAILED QUERY LOG ▮'));
+          queryLogger(`${chalk.red('▮')} ${q}`);
+          queryLogger(`${chalk.red('▮')} ${pp(queryParams)}`);
+          queryLogger(`${chalk.red('▮')} ${err}`);
+          queryLogger(chalk.red('▮ END FAILED QUERY ▮'));
           resolve({err});
         }
         else {
-          queryLogger(`${'●'['green']} ${q} ${pp(queryParams)}`);
+          queryLogger(`${chalk.green('●')} ${q} ${pp(queryParams)}`);
           resolve({err: null, rows, fields});
         }
       });

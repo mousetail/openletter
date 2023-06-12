@@ -15,7 +15,7 @@
     "console": "node ./build/console.js"
   },
   "dependencies": {
-    "colors": "^1.1.2",
+    "chalk": "^4.1.2",
     "debug": "^4.3.4",
     "ejs": "^3.1.9",
     "ejs-layouts": "^0.0.1",

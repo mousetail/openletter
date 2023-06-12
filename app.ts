@@ -3,7 +3,7 @@ import sassMiddleware from 'node-sass-middleware';
 import layouts from 'ejs-layouts';
 import mysql from 'mysql2';
 import createDebug from 'debug';
-require('colors'); // eslint-disable-line import/no-unassigned-import
+import chalk from 'chalk';
 
 import express, { json, urlencoded } from 'express';
 
@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(layouts.express);
 
-// Libraries setup: body parser SCSS compilation, static files.
+// Libraries setup: body parser (for POST request bodies), cookie parser, SCSS compilation, static files.
 app.use(json());
 app.use(urlencoded({extended: false}));
 app.use(sassMiddleware({
@@ -68,5 +68,5 @@ app.use((req: express.Request, res: ResponseWithLayout) => {
     await queries(pool, [[], []], "SET GLOBAL sql_mode = 'NO_ENGINE_SUBSTITUTION,ALLOW_INVALID_DATES';", "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION,ALLOW_INVALID_DATES';");
 
     app.listen(config.port);
-    appLogger(`Listening on ${config.port}.`['green']['bold']);
+    appLogger(chalk.bold.green(`Listening on ${config.port}.`));
 })();
