@@ -10,7 +10,7 @@ import type { Debugger } from 'debug';
 import { getAuthURL } from '../helpers/auth';
 import { getSignatoryBreakdown } from '../helpers/signatories';
 const fetch = require('node-fetch');
-const router = express.Router(); // eslint-disable-line new-cap
+const router = express.Router();
 
 const minimumDate = new Date('2023-06-05T04:00:00Z');
 
@@ -35,11 +35,11 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
     });
 
 
-    router.get('/faq-4ds21xFq', async (req: express.Request, res: ResponseWithLayout) => {
+    router.get('/faq-4ds21xFq', (req: express.Request, res: ResponseWithLayout) => {
         render(req, res, 'dashboard/faq', {}, { pool });
     });
 
-    router.get('/favicon.ico', async (_req: express.Request, res: ResponseWithLayout) => {
+    router.get('/favicon.ico', (_req: express.Request, res: ResponseWithLayout) => {
         res.redirect('/icon.png');
     });
 

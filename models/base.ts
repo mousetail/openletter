@@ -247,7 +247,7 @@ export class BaseModel {
    * Execute the query queued on this model and return the result.
    * @returns {Array} an array of model instances
    */
-    static async get(): Promise<Array<BaseModel>> {
+    static get(): Promise<Array<BaseModel>> {
         if (this.queryBuilder) {
             const query = this.queryBuilder;
             this.queryBuilder = null;
@@ -262,7 +262,7 @@ export class BaseModel {
    * Execute the query queued on this model and return the result, without clearing the queued query.
    * @returns {Array} an array of model instances
    */
-    static async getUncleared(): Promise<Array<BaseModel>> {
+    static getUncleared(): Promise<Array<BaseModel>> {
         if (this.queryBuilder) {
             const query = this.queryBuilder;
             return query.execute(BaseModel.pool);
@@ -325,7 +325,7 @@ export class BaseModel {
    * @param attribs new attributes for the model instance.
    * @returns {Boolean} indicating if the update succeeded.
    */
-    async update(attribs: any): Promise<boolean> {
+    update(attribs: any): Promise<boolean> {
         return new Promise<boolean>(async (resolve) => {
             let params;
             let values;

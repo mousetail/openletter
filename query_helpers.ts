@@ -5,7 +5,7 @@ import et from 'express';
 import chalk from 'chalk';
 
 const queryLogger = createDebug('app:query');
-createDebug('app:helpers'); // eslint-disable-line import/no-unassigned-import
+createDebug('app:helpers');
 
 /**
  * Detect if a value is an object literal, i.e. declared with a literal or created with `new Object`.

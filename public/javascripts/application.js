@@ -133,5 +133,9 @@
     };
 
     // On document ready, or immediately if already loaded
-    document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', () => appInit()) : appInit();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => appInit());
+    } else {
+        appInit();
+    }
 })();

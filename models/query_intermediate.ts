@@ -221,6 +221,6 @@ export class QueryIntermediate {
             throw err;
         }
 
-        return rows.map((x) => new this.cls(x)); // eslint-disable-line new-cap
+        return rows.map((x) => new this.cls(x));
     }
 }
