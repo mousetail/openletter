@@ -1,4 +1,4 @@
-import {BaseModel} from './base';
+import { BaseModel } from './base';
 
 export class Signatory extends BaseModel {
     id: number;
