@@ -24,6 +24,7 @@ export const objectMap = <T extends object, U extends (k: string, v: T[keyof T])
 };
 
 export class BaseModel {
+    id: number;
     /**
    * Internal. The DB table name for the current model. Models extending this class should override both the static
    * and instance forms of this.
@@ -114,7 +115,7 @@ export class BaseModel {
    */
     static async count(): Promise<number> {
         const selected = this.getSelected();
-        const results = await this.select('COUNT(*) AS ct').getUncleared();
+        const results = await this.select('COUNT(*) AS ct').getUncleared() as (BaseModel & { ct: number })[];
         this.select(...selected); // Reset the select list on the queued query so that queries without explicit SELECTs still work afterwards
         return results[0].ct;
     }
@@ -272,14 +273,14 @@ export class BaseModel {
         }
     }
 
-    attribs: object;
+    attribs: { id: number };
 
     /**
    * Construct an instance of the model. Does not save it to the database - call save().
    * @param attribs an object of attributes to set on the new instance
    */
     constructor(attribs: object) {
-        this.attribs = attribs;
+        this.attribs = attribs as { id: number };
         this.setShortcutMethods();
     }
 

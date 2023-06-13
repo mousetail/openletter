@@ -33,12 +33,12 @@ export class QueryIntermediate {
     }
 
     cls: any;
-    params: {where: {_raw?: Array<any>}, limit: number, offset: number, order: Array<any>, joins: Array<any>, select?: Array<string>};
-    opts: {whereJoiner: string};
+    params: { where: { _raw?: Array<any> }, limit: number, offset: number, order: Array<any>, joins: Array<any>, select?: Array<string> };
+    opts: { whereJoiner: string };
     values: Array<any>;
 
     constructor(cls: any,
-        { where = {}, limit = null, offset = null, order = [] }: {where?: object, limit?: number, offset?: number, order?: Array<any>} = {}) {
+        { where = {}, limit = null, offset = null, order = [] }: { where?: object, limit?: number, offset?: number, order?: Array<any> } = {}) {
         this.cls = cls;
         this.params = { where, limit, offset, order, joins: [] };
         this.opts = { whereJoiner: ' AND ' };
@@ -91,14 +91,14 @@ export class QueryIntermediate {
         return this.params.select || [];
     }
 
-    join(toTable: string, sourceColumn: string | string[], targetColumn: string | string[], { as = null, joinType = null }: {as?: string, joinType?: string}) {
+    join(toTable: string, sourceColumn: string | string[], targetColumn: string | string[], { as = null, joinType = null }: { as?: string, joinType?: string }) {
         const join: Array<any> = [toTable, sourceColumn, targetColumn];
         join.push({ as, joinType });
         this.params.joins.push(join);
         return this;
     }
 
-    _createWhereClauses(o: object, table?: string): Array<string> {
+    _createWhereClauses(o: { _raw?: string[] }, table?: string): Array<string> {
         let where = [];
         for (const key of Object.keys(o)) {
             if (key === '_raw') {

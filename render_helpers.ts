@@ -19,7 +19,7 @@ import viewHelpers from './view_helpers';
  * @param status optional - a numeric HTTP status to return
  */
 export const render = (req: et.Request, res: ResponseWithLayout, view: string | object | Array<any>, locals: Object = {},
-    { layout, pool, status }: {layout?: string, pool: mt.Pool, status?: number}) => {
+    { layout, pool, status }: { layout?: string, pool: mt.Pool, status?: number }) => {
     if (status) {
         res.status(status);
     }
@@ -30,13 +30,13 @@ export const render = (req: et.Request, res: ResponseWithLayout, view: string | 
 
         // Because the default layout requires a title
         // but individual actions might not set it, make sure we have a default.
-        let localVars = locals;
+        let localVars = locals as { title?: string };
         localVars.title = localVars.title || '';
 
         localVars = Object.assign(localVars, viewHelpers(req, res, pool));
         res.layout(fullLayout, localVars, { content: { block: view, data: localVars } });
     } else {
-    // If view isn't a string, assume it's intended to be sent as JSON.
+        // If view isn't a string, assume it's intended to be sent as JSON.
         res.set('Content-Type', 'application/json');
         res.send(JSON.stringify(view));
     }
