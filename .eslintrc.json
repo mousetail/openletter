@@ -45,6 +45,7 @@
       "no-tabs": "error",
       "no-undefined": "error",
       "no-unneeded-ternary": "error",
-      "no-unused-expressions": "error"
+      "no-unused-expressions": "error",
+      "object-curly-spacing": ["error", "always"]
     }
   }

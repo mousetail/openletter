@@ -6,8 +6,8 @@ import * as renderHelpers from './render_helpers';
 import * as viewHelpers from './view_helpers';
 import config from './config/config';
 
-import {BaseModel} from './models/base';
-import {Signatory} from './models/signatory';
+import { BaseModel } from './models/base';
+import { Signatory } from './models/signatory';
 
 (async () => {
     const pool = mysql.createPool(config.database.connectionObject());
@@ -18,6 +18,6 @@ import {Signatory} from './models/signatory';
     const re = repl.start('openletter> ');
     const context = {};
     Object.assign(context, queryHelpers, renderHelpers, viewHelpers, config);
-    Object.assign(context, {BaseModel, Signatory});
+    Object.assign(context, { BaseModel, Signatory });
     Object.assign(re.context, context);
 })();

@@ -1,6 +1,6 @@
-import {query} from '../query_helpers';
+import { query } from '../query_helpers';
 import mt from 'mysql2';
-import {BaseModel} from './base';
+import { BaseModel } from './base';
 
 
 /**
@@ -38,10 +38,10 @@ export class QueryIntermediate {
     values: Array<any>;
 
     constructor(cls: any,
-        {where = {}, limit = null, offset = null, order = []}: {where?: object, limit?: number, offset?: number, order?: Array<any>} = {}) {
+        { where = {}, limit = null, offset = null, order = [] }: {where?: object, limit?: number, offset?: number, order?: Array<any>} = {}) {
         this.cls = cls;
-        this.params = {where, limit, offset, order, joins: []};
-        this.opts = {whereJoiner: ' AND '};
+        this.params = { where, limit, offset, order, joins: [] };
+        this.opts = { whereJoiner: ' AND ' };
         this.values = [];
     }
 
@@ -91,9 +91,9 @@ export class QueryIntermediate {
         return this.params.select || [];
     }
 
-    join(toTable: string, sourceColumn: string | string[], targetColumn: string | string[], {as = null, joinType = null}: {as?: string, joinType?: string}) {
+    join(toTable: string, sourceColumn: string | string[], targetColumn: string | string[], { as = null, joinType = null }: {as?: string, joinType?: string}) {
         const join: Array<any> = [toTable, sourceColumn, targetColumn];
-        join.push({as, joinType});
+        join.push({ as, joinType });
         this.params.joins.push(join);
         return this;
     }
@@ -161,7 +161,7 @@ export class QueryIntermediate {
             const targetCol = x[2] instanceof Array ?
                 QueryIntermediate.escapeName(x[2][0]) + '.' + QueryIntermediate.escapeName(x[2][1]) :
                 table + '.' + QueryIntermediate.escapeName(x[2]);
-            let {as = null, joinType = null} = x[3];
+            let { as = null, joinType = null } = x[3];
 
             if (as) {
                 as = QueryIntermediate.escapeName(as);
@@ -215,7 +215,7 @@ export class QueryIntermediate {
         const queryData = this._construct();
         this.values = [];
         const data: any = await query(pool, [queryData[1]], queryData[0]);
-        const {err, rows} = data[0];
+        const { err, rows } = data[0];
 
         if (err) {
             throw err;

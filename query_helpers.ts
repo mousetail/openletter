@@ -78,10 +78,10 @@ export const queries = (pool: mt.Pool, params: Array<any> = [], ...queries: Arra
                     queryLogger(`${chalk.red('▮')} ${pp(queryParams)}`);
                     queryLogger(`${chalk.red('▮')} ${err}`);
                     queryLogger(chalk.red('▮ END FAILED QUERY ▮'));
-                    resolve({err});
+                    resolve({ err });
                 } else {
                     queryLogger(`${chalk.green('●')} ${q} ${pp(queryParams)}`);
-                    resolve({err: null, rows, fields});
+                    resolve({ err: null, rows, fields });
                 }
             });
         });
@@ -151,7 +151,7 @@ export const parameters = (req: et.Request, options: object): object => {
         }
     });
 
-    return Object.assign(final, {errors});
+    return Object.assign(final, { errors });
 };
 
 /**

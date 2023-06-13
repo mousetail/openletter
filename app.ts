@@ -8,11 +8,11 @@ import chalk from 'chalk';
 import express, { json, urlencoded } from 'express';
 
 import { ResponseWithLayout } from './definitions';
-import {render} from './render_helpers';
-import {queries} from './query_helpers';
-import {BaseModel} from './models/base';
+import { render } from './render_helpers';
+import { queries } from './query_helpers';
+import { BaseModel } from './models/base';
 import config from './config/config';
-import {routes} from './config/routes';
+import { routes } from './config/routes';
 
 const appLogger = createDebug('app:base');
 const routesLogger = createDebug('app:routes');
@@ -29,7 +29,7 @@ app.use(layouts.express);
 
 // Libraries setup: body parser (for POST request bodies), cookie parser, SCSS compilation, static files.
 app.use(json());
-app.use(urlencoded({extended: false}));
+app.use(urlencoded({ extended: false }));
 app.use(sassMiddleware({
     src: path.join(__dirname, 'public'),
     dest: path.join(__dirname, 'public'),
@@ -54,12 +54,12 @@ for (const [path, routerFactory] of Object.entries(routes)) {
 // Handle errors
 app.use((req: express.Request, res: ResponseWithLayout) => {
     if (res.statusCode === 500) {
-        render(req, res, 'common/coded_err', {name: 'Server Error',
-            description: 'The server encountered an internal error while serving your request.'},
-        {pool});
+        render(req, res, 'common/coded_err', { name: 'Server Error',
+            description: 'The server encountered an internal error while serving your request.' },
+        { pool });
     } else {
-        render(req, res, 'common/coded_err', {name: 'Not Found', description: 'The page you requested could not be found.'},
-            {pool});
+        render(req, res, 'common/coded_err', { name: 'Not Found', description: 'The page you requested could not be found.' },
+            { pool });
     }
 });
 

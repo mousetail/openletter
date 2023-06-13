@@ -3,7 +3,7 @@ import ejs from 'ejs';
 
 const renderLogger = createDebug('app:render');
 
-import {ResponseWithLayout} from './definitions';
+import { ResponseWithLayout } from './definitions';
 import et from 'express';
 import mt from 'mysql2';
 import viewHelpers from './view_helpers';
@@ -19,7 +19,7 @@ import viewHelpers from './view_helpers';
  * @param status optional - a numeric HTTP status to return
  */
 export const render = (req: et.Request, res: ResponseWithLayout, view: string | object | Array<any>, locals: Object = {},
-    {layout, pool, status}: {layout?: string, pool: mt.Pool, status?: number}) => {
+    { layout, pool, status }: {layout?: string, pool: mt.Pool, status?: number}) => {
     if (status) {
         res.status(status);
     }
@@ -34,7 +34,7 @@ export const render = (req: et.Request, res: ResponseWithLayout, view: string | 
         localVars.title = localVars.title || '';
 
         localVars = Object.assign(localVars, viewHelpers(req, res, pool));
-        res.layout(fullLayout, localVars, {content: {block: view, data: localVars}});
+        res.layout(fullLayout, localVars, { content: { block: view, data: localVars } });
     } else {
     // If view isn't a string, assume it's intended to be sent as JSON.
         res.set('Content-Type', 'application/json');
@@ -52,7 +52,7 @@ export const render = (req: et.Request, res: ResponseWithLayout, view: string | 
 export const renderInternalView = (file, data, options = {}) => {
     return new Promise((resolve) => {
         ejs.renderFile(file, data, options, (err, str) => {
-            resolve({err, str});
+            resolve({ err, str });
         });
     });
 };
@@ -65,5 +65,5 @@ export const renderInternalView = (file, data, options = {}) => {
  * @param pool optional - a database connection pool
  */
 export const error = (req: et.Request, res: ResponseWithLayout, err: any, pool: mt.Pool) => {
-    render(req, res, 'common/error', {title: 'Error', error: err}, {pool});
+    render(req, res, 'common/error', { title: 'Error', error: err }, { pool });
 };
