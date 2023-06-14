@@ -21,9 +21,7 @@
         switchMode(darkMode) {
             this.darkMode = darkMode;
 
-            document
-                .documentElement
-                .classList[this.darkMode ? 'add' : 'remove']('dark-mode');
+            document.documentElement.classList.toggle('dark-mode', this.darkMode);
 
             // Save dark mode preference to local storage
             try {
