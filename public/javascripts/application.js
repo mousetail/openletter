@@ -10,19 +10,20 @@
             try {
                 const stored = window.localStorage.getItem(this.darkModeKey);
 
-                if (stored !== null) {
-                    const darkMode = stored === 'true';
-                    this.switchMode(darkMode);
-                }
+                this.switchMode(
+                    stored
+                        ? stored === 'true'
+                        : this.darkMode
+                );
             } catch (e) { } // ignore ls errors
         },
 
         switchMode(darkMode) {
-            const link = document.querySelector('link[href*="dark.css"]');
-            if (!link) return; // no dark mode stylesheet, can't toggle
-
-            link.disabled = !darkMode;
             this.darkMode = darkMode;
+
+            document
+                .documentElement
+                .classList[this.darkMode ? 'add' : 'remove']('dark-mode');
 
             // Save dark mode preference to local storage
             try {
