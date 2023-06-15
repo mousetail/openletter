@@ -7,7 +7,7 @@
     "exec": "exec",
     "cmd": "cmd",
     "typecheck": "tsc --noEmit",
-    "test": "eslint *.ts routes/* public/javascripts/* config/* helpers/* models/*",
+    "test": "eslint .",
     "lint": "npm run test -- --fix",
     "dashboard": "cross-env DEBUG=app:* node build/app.js",
     "build": "sh ./build.sh || exit 1",
