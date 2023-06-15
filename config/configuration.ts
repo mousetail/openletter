@@ -1,9 +1,9 @@
 export type SiteSettings = Array<
-    | ["clientId", string]
-    | ["clientSecret", string]
-    | ["key", string]
-    | ["letterVersion", string]
-    | ["redirectUri", string]
+    | ['clientId', string]
+    | ['clientSecret', string]
+    | ['key', string]
+    | ['letterVersion', string]
+    | ['redirectUri', string]
 >;
 
 export interface ConfigOptions {
