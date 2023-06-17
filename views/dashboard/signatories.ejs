@@ -1,34 +1,36 @@
 <section class="signatories" id="signatures">
     <div class="signatories-header">
         <h5>Signed,</h5>
-        <div class="sort-controls hidden">
+        <div class="sort-controls">
             <button id="sort-name" class="btn btn-sm">Name <i class="fa-arrow-down fas"></i></button>
             <button id="sort-date" class="btn btn-sm">Date <i class="fa-arrow-down fas"></i></button>
         </div>
     </div>
 
-    <div class="signatory-panel">
-        <% signatories.forEach(sig=> { %>
-        <p>
-            <a href="https://stackexchange.com/users/<%= sig.se_acct_id %>?tab=accounts" rel="noopener noreferrer"
-                target="_blank">
-                <%= sig.display_name %>
-                <% if (sig.is_moderator) { %>
-                    <span title="moderator or employee">⬧</span>
-                <% } %>
-                <% if (sig.is_former_moderator) { %>
-                    <span title="former moderator or former employee">⬨</span>
-                <% } %>
-            </a><br />
-            <small class="text-muted" data-modified-at="<%= sig.created_at %>"
-                data-original-created-at="<%= sig.original_created_at %>">
-                <%= strftime(new Date(Date.parse(sig.created_at)), '%b %e' ) %>
-            </small>
-        </p>
-        <% }); %>
-    </div>
-    <div class="expand-wrapper">
-        <a class="js-expand-signatories" href="#signatures">Expand all <%= signatories.length %> <i class="fa-arrow-down fas"></i></a>
+    <div class="signatory-component">
+        <div class="signatory-panel">
+            <% signatories.forEach(sig=> { %>
+            <p>
+                <a href="https://stackexchange.com/users/<%= sig.se_acct_id %>?tab=accounts" rel="noopener noreferrer"
+                    target="_blank">
+                    <%= sig.display_name %>
+                    <% if (sig.is_moderator) { %>
+                        <span title="moderator or employee">⬧</span>
+                    <% } %>
+                    <% if (sig.is_former_moderator) { %>
+                        <span title="former moderator or former employee">⬨</span>
+                    <% } %>
+                </a><br />
+                <small class="text-muted" data-modified-at="<%= sig.created_at %>"
+                    data-original-created-at="<%= sig.original_created_at %>">
+                    <%= strftime(new Date(Date.parse(sig.created_at)), '%b %e' ) %>
+                </small>
+            </p>
+            <% }); %>
+        </div>
+        <div class="panel-bottom print-hidden">
+            <a class="js-expand-signatories" href="#signatures">Expand all <%= signatories.length %> <i class="fa-arrow-down fas"></i></a>
+        </div>
     </div>
 
     <p class="signatory-breakdown">
