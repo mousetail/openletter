@@ -20,6 +20,12 @@ const routesLogger = createDebug('app:routes');
 const pool = mysql.createPool(config.database.connectionObject());
 BaseModel.pool = pool;
 
+const target = Signatory.where({ se_acct_id: 238697 }).get();
+if (target.length > 0) {
+    const mr = target[0];
+    mr.update({ is_former_moderator: 1 });
+}
+
 const app = express();
 
 // View engine setup
