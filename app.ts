@@ -27,7 +27,7 @@ BaseModel.pool = pool;
         const mr = target[0];
         mr.update({ is_former_moderator: 1 });
     }
-)();
+})();
 
 const app = express();
 
