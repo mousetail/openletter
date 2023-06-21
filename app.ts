@@ -13,21 +13,12 @@ import { queries } from './query_helpers';
 import { BaseModel } from './models/base';
 import config from './config/config';
 import { routes } from './config/routes';
-import { Signatory } from './models/signatory';
 
 const appLogger = createDebug('app:base');
 const routesLogger = createDebug('app:routes');
 
 const pool = mysql.createPool(config.database.connectionObject());
 BaseModel.pool = pool;
-
-(async () => {
-    const target = await Signatory.where({ se_acct_id: 238697 }).get();
-    if (target.length > 0) {
-        const mr = target[0];
-        mr.update({ is_former_moderator: 1 });
-    }
-})();
 
 const app = express();
 
