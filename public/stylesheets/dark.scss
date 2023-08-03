@@ -1,114 +1,123 @@
 // Important: When editing this file change the version number in views/layouts/application.ejs
 // Otherwise people will still have the old version cached
 
-body {
-    background: #222;
-}
-
-a {
-    color: #3396ff;
-
-    &:hover {
-        color: #66b0ff;
+html.dark-mode {
+    body {
+        background: #222;
     }
-}
-
-hr {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.text-muted {
-    color: #8f979e !important; // Override !important in bootstrap
 
     a {
-        color: #0074f0;
-    }
-}
+        color: #3396ff;
 
-.btn-primary {
-    background: #3396ff;
-    border-color: #3396ff;
-}
-
-.form-control {
-    color: #ffffff;
-    background: #2c2c2c;
-    border: 1px solid #ced4da;
-
-    &:focus {
-        color: #ffffff;
-        background: #444;
-    }
-}
-
-.color-mode-toggle {
-    background: #eee;
-    color: #222;
-    border: none;
-
-    .fa-sun {
-        display: block;
-    }
-
-    .fa-moon {
-        display: none;
-    }
-}
-
-aside {
-    background: #453700;
-    color: #ddd;
-    border-color: #666;
-
-    &.danger {
-        background-color: #4f0000;
-        color: #ddd;
-        border-color: #666;
-    }
-}
-
-main {
-    background: #333;
-    color: #ddd;
-}
-
-header {
-    filter: brightness(0.8) contrast(1.2);
-}
-
-.content-container {
-    box-shadow: 0 0 0.5em #111;
-}
-
-section.signatories {
-    .signatories-header {
-        h5 {
-            color: #aaa;
+        &:hover {
+            color: #66b0ff;
         }
     }
 
-    .expand-wrapper {
-        box-shadow: inset 0px 7px 5px -3px rgba(255, 255, 255, 0.1);
+    hr {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .text-muted {
+        color: #8f979e !important; // Override !important in bootstrap
 
         a {
-            border-top: 1px solid #333;
-            background-color: #333;
+            color: #0074f0;
         }
     }
-}
 
-.signatory-panel > p:hover {
-    background: #444;
-}
+    .btn-primary {
+        background: #3396ff;
+        border-color: #3396ff;
+    }
 
-.footer {
-    color: white;
-}
+    .form-control {
+        color: #ffffff;
+        background: #2c2c2c;
+        border: 1px solid #ced4da;
 
-.btn {
-    color: white;
+        &:focus {
+            color: #ffffff;
+            background: #444;
+        }
+    }
 
-    &:hover {
-        color: lightgrey;
+    .color-mode-toggle {
+        background: #eee;
+        color: #222;
+        border: none;
+
+        .fa-sun {
+            display: block;
+        }
+
+        .fa-moon {
+            display: none;
+        }
+    }
+
+    aside {
+        background: #453700;
+        color: #ddd;
+        border-color: #666;
+
+        &.danger {
+            background-color: #4f0000;
+            color: #ddd;
+            border-color: #666;
+        }
+    }
+
+    main {
+        background: #333;
+        color: #ddd;
+    }
+
+    header {
+        filter: brightness(0.8) contrast(1.2);
+    }
+
+    .content-container {
+        box-shadow: 0 0 0.5em #111;
+    }
+
+    section.signatories {
+        .signatories-header {
+            h5 {
+                color: #aaa;
+            }
+        }
+
+        .signatory-component {
+            .panel-bottom {
+                box-shadow: inset 0px 7px 5px -3px rgba(255, 255, 255, 0.1);
+                background-color: #333; /* same as main */
+
+                &::before {
+                    border-top-color: #ddd;
+                }
+
+                a {
+                    border-top: 1px solid #333;
+                    background-color: #333; /* same as main */
+                }
+            }
+        }
+    }
+
+    .signatory-panel > p:hover {
+        background: #444;
+    }
+
+    .footer {
+        color: white;
+    }
+
+    .btn {
+        color: white;
+
+        &:hover {
+            color: lightgrey;
+        }
     }
 }
