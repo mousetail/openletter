@@ -43,70 +43,67 @@ export default (pool: mt.Pool, _log: Debugger): express.Router => {
         res.redirect('/icon.png');
     });
 
-    router.post('/sign', async (_req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {
-        res.status(404);
-
-        // const displayName = req.body.display_name || null;
-        // const letter = req.body.letter || 'main';
-        // if (displayName.indexOf('♦') !== -1) {
-        //     error(req, res, 'You may not use the ♦ character in your display name.', pool);
-        //     return;
-        // }
-        // if (displayName.indexOf('◊') !== -1) {
-        //     error(req, res, 'You may not use the ◊ character in your display name.', pool);
-        //     return;
-        // }
-        // const signatory: Signatory = await <Promise<Signatory>>Signatory.create({ display_name: displayName, letter });
-        // res.redirect(getAuthURL(config, signatory, letter));
+    router.post('/sign', async (req: express.Request<any, any, SignRequestBody>, res: ResponseWithLayout) => {
+        const displayName = req.body.display_name || null;
+        const letter = req.body.letter || 'main';
+        if (displayName.indexOf('♦') !== -1) {
+            error(req, res, 'You may not use the ♦ character in your display name.', pool);
+            return;
+        }
+        if (displayName.indexOf('◊') !== -1) {
+            error(req, res, 'You may not use the ◊ character in your display name.', pool);
+            return;
+        }
+        const signatory: Signatory = await <Promise<Signatory>>Signatory.create({ display_name: displayName, letter });
+        res.redirect(getAuthURL(config, signatory, letter));
     });
 
-    router.get('/auth-redirect', async (_req: express.Request<any, any, any, AuthRedirectRequestQs>, res: ResponseWithLayout) => {
-        res.status(404);
-        // const code = req.query.code;
-        // const state = req.query.state;
-        // const signatoryId = state.split('|')[0];
-        // const letter = state.split('|')[1];
+    router.get('/auth-redirect', async (req: express.Request<any, any, any, AuthRedirectRequestQs>, res: ResponseWithLayout) => {
+        const code = req.query.code;
+        const state = req.query.state;
+        const signatoryId = state.split('|')[0];
+        const letter = state.split('|')[1];
 
-        // const params = new URLSearchParams();
-        // params.append('client_id', config.getSiteSetting('clientId'));
-        // params.append('client_secret', config.getSiteSetting('clientSecret'));
-        // params.append('code', code);
-        // params.append('redirect_uri', config.getSiteSetting('redirectUri'));
+        const params = new URLSearchParams();
+        params.append('client_id', config.getSiteSetting('clientId'));
+        params.append('client_secret', config.getSiteSetting('clientSecret'));
+        params.append('code', code);
+        params.append('redirect_uri', config.getSiteSetting('redirectUri'));
 
-        // const key = config.getSiteSetting('key');
+        const key = config.getSiteSetting('key');
 
-        // try {
-        //     const resp = await fetch('https://stackexchange.com/oauth/access_token/json', {
-        //         method: 'POST',
-        //         body: params
-        //     });
-        //     const data = await resp.json();
-        //     const accessToken = data.access_token;
+        try {
+            const resp = await fetch('https://stackexchange.com/oauth/access_token/json', {
+                method: 'POST',
+                body: params
+            });
+            const data = await resp.json();
+            const accessToken = data.access_token;
 
-        //     let page = 1, items = [], has_more = true;
-        //     while (has_more) {
-        //         const assocResp = await fetch(`https://api.stackexchange.com/2.2/me/associated?access_token=${accessToken}&filter=!*L3o9HqJx_y6B8td&page=${page}&key=${key}`);
-        //         const assocData = await assocResp.json();
-        //         items = items.concat(assocData.items);
-        //         has_more = assocData.has_more;
-        //         page++;
-        //     }
+            let page = 1, items = [], has_more = true;
+            while (has_more) {
+                const assocResp = await fetch(`https://api.stackexchange.com/2.2/me/associated?access_token=${accessToken}&filter=!*L3o9HqJx_y6B8td&page=${page}&key=${key}`);
+                const assocData = await assocResp.json();
+                items = items.concat(assocData.items);
+                has_more = assocData.has_more;
+                page++;
+            }
 
-        //     const accountId = items[0].account_id;
-        //     const isModerator = items.filter((i) => i.user_type === 'moderator').length > 0;
+            const accountId = items[0].account_id;
+            const isModerator = items.filter((i) => i.user_type === 'moderator').length > 0;
 
-        //     const signatory: Signatory = await <Promise<Signatory>>Signatory.find(Number.parseInt(signatoryId));
-        //     const success = await signatory.update({ se_acct_id: accountId, is_moderator: isModerator });
+            const signatory: Signatory = await <Promise<Signatory>>Signatory.find(Number.parseInt(signatoryId));
+            const success = await signatory.update({ se_acct_id: accountId, is_moderator: isModerator });
 
-        //     if (success) {
-        //         res.redirect(letter === 'main' ? '/' : `/${letter}`);
-        //     } else {
-        //         error(req, res, 'You have already signed this letter.', pool);
-        //     }
-        // } catch (err) {
-        //     console.error(err);
-        //     error(req, res, 'Unknown server error. This problem has been logged.', pool);
-        // }
+            if (success) {
+                res.redirect(letter === 'main' ? '/' : `/${letter}`);
+            } else {
+                error(req, res, 'You have already signed this letter.', pool);
+            }
+        } catch (err) {
+            console.error(err);
+            error(req, res, 'Unknown server error. This problem has been logged.', pool);
+        }
     });
 
     return router;
